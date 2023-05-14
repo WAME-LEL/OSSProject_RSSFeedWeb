@@ -1,0 +1,16 @@
+<body>
+     <div class="title_container">
+            구독 페이지
+     </div>
+
+    <div class="post_container">
+        <form action="{%url 'pybo:LatestEntriesFeed' LatestEntriesFeed.title}" method="post">
+        {%csrf_token%}
+        <textarea name="content" id ="content" rows="3" cols="30"></textarea>
+        <input type="submit" style="WIDTH : 30pt; HEIGHT : 35pt" value="추가">
+        <br>
+        <a href="{%url 'rss_feed'%}">돌아가기</a>
+        </form>
+    </div>
+</body>
+

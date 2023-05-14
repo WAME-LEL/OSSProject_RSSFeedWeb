@@ -13,8 +13,6 @@ from django.http import HttpResponse
 
 from django.shortcuts import render
 import feedparser
-from bs4 import BeautifulSoup
-import requests
 
 def rss_feed(request):
     # RSS 피드 주소
@@ -35,3 +33,9 @@ def rss_feed(request):
 
     # 템플릿 렌더링
     return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry})
+
+#구독 버튼, 돌아오는 버튼 이벤트
+def sub(request):
+    return render(request,'RssFeedWeb/sub.html')
+def back(request):
+    return render(request,'RssFeedWeb/rss_feed.html')
