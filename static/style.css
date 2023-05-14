@@ -1,0 +1,18 @@
+.title_container{
+    width: inherit;
+    height: 200px;
+    border: 1px solid black;
+    font-size: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.select_container{
+    width: 200px;
+    border: 1px solid black;
+}
+
+.main_container{
+    display: flex;
+    border: 1px solid black;
+}
