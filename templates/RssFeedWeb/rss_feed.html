@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RSS Feed</title>
+</head>
+<body>
+
+<div>
+    <a href="{{ latest_entry.link }}">{{ latest_entry.title }}</a>
+
+    <div>
+        <h1>블로그: {{feed.feed.title}}</h1>
+        <h2>포스트: {{ latest_entry.title }}</h2>
+        <h3>{{ latest_entry.pubDate}}</h3>
+
+
+        <p>{{ latest_entry.description|safe}}</p>
+        <h3>{{ latest_entry.published }}</h3>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

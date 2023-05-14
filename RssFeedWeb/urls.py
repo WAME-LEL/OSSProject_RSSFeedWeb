@@ -1,0 +1,15 @@
+# from django.urls import path
+# from .views import LatestPostsFeed
+# from . import views
+#
+# urlpatterns = [
+#     path('feed/', LatestPostsFeed(), name='post_feed')
+# ]
+
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.rss_feed),
+]
