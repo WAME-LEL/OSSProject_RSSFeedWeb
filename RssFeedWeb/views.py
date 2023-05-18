@@ -1,9 +1,4 @@
-from django.shortcuts import render
-from django.contrib.syndication.views import Feed
-from django.urls import reverse
-
 # Create your views here.
-from django.http import HttpResponse
 
 # def index(request):
 #     # context = {'question_list': list}
@@ -11,9 +6,12 @@ from django.http import HttpResponse
 
 # views.py
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 import feedparser
 from bs4 import BeautifulSoup
+
+from RssFeedWeb.models import subsData
 
 
 def rss_feed(request):
@@ -64,3 +62,9 @@ def sub(request):
     return render(request,'RssFeedWeb/sub.html')
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
+def LatestEntriesFeed(request, subsData_id):
+    subscribe = get_object_or_404(subsData, pk=subsData_id)
+    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
+    return redirect('RssFeedWeb:detail', subsData_id=subsData.id)
+def detail(request):
+    return render(request,'RssFeedWeb/sub.html')

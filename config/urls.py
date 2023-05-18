@@ -21,6 +21,4 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('latest/feed/', include('RssFeedWeb.urls')),
-    # path('latest/feed/', LatestPostsFeed(), name='post_feed')
-
 ]

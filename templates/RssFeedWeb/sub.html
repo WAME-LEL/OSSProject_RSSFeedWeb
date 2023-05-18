@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="post_container">
-                    <form action="{%url 'pybo:LatestEntriesFeed' LatestEntriesFeed.title}" method="post">
+                    <form action="{% url 'RssFeedWeb:LatestEntriesFeed' subsData.id %}" method="post">
                         {%csrf_token%}
                         <textarea name="content" id="content" rows="3" cols="30"></textarea>
                         <input type="submit" style="WIDTH : 30pt; HEIGHT : 35pt" value="추가">
