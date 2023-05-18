@@ -17,7 +17,8 @@
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
 
 
     <!-- Navbar Brand-->
@@ -28,7 +29,6 @@
     <!-- Sidebar Toggle-->
 
 </nav>
-
 
 
 <div id="layoutSidenav">
@@ -87,95 +87,95 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <div class="post_container">
 
-                    <div>
-                        <div class="m-3">
-                            <div class="card">
-                                <h5 class="card-header">{{feed.feed.title}}</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold">{{ latest_entry.title }} <span
-                                            class="badge bg-secondary">New</span></h5>
-                                    <div class="card-text">
-                                        <div class="overflow-hidden" style="height:100px;">
-                                            <span class="badge text-bg-success">summary</span>
+                <div>
+                    <div class="m-3">
+                        <div class="card">
+                            <h5 class="card-header">{{feed.feed.title}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ latest_entry.title }} <span
+                                        class="badge bg-secondary">New</span></h5>
+                                <div class="card-text">
+                                    <div class="overflow-hidden" style="height:100px;">
+                                        <span class="badge text-bg-success">summary</span>
 
-                                            {% for entries in context.entries %}
-                                            {% if entries.title == latest_entry.title %}
-                                            {% for paragraph in entries.paragraphs %}
-                                            <span>{{ paragraph }}</span>
-                                            {% endfor %}
-                                            {% endif %}
-                                            {% endfor %}
-                                        </div>
-
-                                        <p>
-                                            <span class="badge text-bg-success">published</span>
-                                            &nbsp;{{ latest_entry.published }}</p>
+                                        {% for entries in context.entries %}
+                                        {% if entries.title == latest_entry.title %}
+                                        {% for paragraph in entries.paragraphs %}
+                                        <span>{{ paragraph }}</span>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
                                     </div>
-                                    <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>
+
+                                    <p>
+                                        <span class="badge text-bg-success">published</span>
+                                        &nbsp;{{ latest_entry.published }}</p>
                                 </div>
+                                <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="m-3">
-                            <div class="card">
-                                <h5 class="card-header">{{feed.feed.title}}</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold">{{ second.title }} <span class="badge bg-secondary">New</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        <div class="overflow-hidden" style="height:100px;">
-                                            <span class="badge text-bg-success">summary</span>
+                    <div class="m-3">
+                        <div class="card">
+                            <h5 class="card-header">{{feed.feed.title}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ second.title }} <span
+                                        class="badge bg-secondary">New</span>
+                                </h5>
+                                <div class="card-text">
+                                    <div class="overflow-hidden" style="height:100px;">
+                                        <span class="badge text-bg-success">summary</span>
 
-                                            {% for entries in context.entries %}
-                                            {% if entries.title == second.title %}
-                                            {% for paragraph in entries.paragraphs %}
-                                            <span>{{ paragraph }}</span>
-                                            {% endfor %}
-                                            {% endif %}
-                                            {% endfor %}
-                                        </div>
-
-                                        <p>
-                                            <span class="badge text-bg-success">published</span>
-                                            &nbsp;{{ second.published }}</p>
-
+                                        {% for entries in context.entries %}
+                                        {% if entries.title == second.title %}
+                                        {% for paragraph in entries.paragraphs %}
+                                        <span>{{ paragraph }}</span>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
                                     </div>
-                                    <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
+
+                                    <p>
+                                        <span class="badge text-bg-success">published</span>
+                                        &nbsp;{{ second.published }}</p>
+
                                 </div>
+                                <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="m-3">
-                            <div class="card">
-                                <h5 class="card-header">{{feed.feed.title}}</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold">{{ third.title }} <span class="badge bg-secondary">New</span>
-                                    </h5>
-                                    <div class="card-text">
-
-
-                                        <div class="overflow-hidden" style="height:100px;">
-                                            <span class="badge text-bg-success">summary</span>
-                                            {% for entries in context.entries %}
-                                            {% if entries.title == third.title %}
-                                            {% for paragraph in entries.paragraphs %}
-                                            <span>{{ paragraph }}</span>
-                                            {% endfor %}
-                                            {% endif %}
-                                            {% endfor %}
-
-                                        </div>
+                    <div class="m-3">
+                        <div class="card">
+                            <h5 class="card-header">{{feed.feed.title}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ third.title }} <span
+                                        class="badge bg-secondary">New</span>
+                                </h5>
+                                <div class="card-text">
 
 
-                                        <p>
-                                            <span class="badge text-bg-success">published</span>
-                                            &nbsp;{{ third.published }}</p>
+                                    <div class="overflow-hidden" style="height:100px;">
+                                        <span class="badge text-bg-success">summary</span>
+                                        {% for entries in context.entries %}
+                                        {% if entries.title == third.title %}
+                                        {% for paragraph in entries.paragraphs %}
+                                        <span>{{ paragraph }}</span>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
 
                                     </div>
-                                    <a href="{{ third.link }}" class="btn btn-primary">Go post</a>
+
+
+                                    <p>
+                                        <span class="badge text-bg-success">published</span>
+                                        &nbsp;{{ third.published }}</p>
+
                                 </div>
+                                <a href="{{ third.link }}" class="btn btn-primary">Go post</a>
                             </div>
                         </div>
                     </div>
