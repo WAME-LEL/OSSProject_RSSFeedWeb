@@ -34,7 +34,7 @@
 (요구사항 정의서 초안입니다. 개발 진행에 따라 변경될 수 있습니다.)
 
 ### WBS
-[WBS 프로젝트를 효율적으로 진행하기 위해 업무 일정을 계획하고 관리할 수
+[(링크)(클릭)WBS 프로젝트를 효율적으로 진행하기 위해 업무 일정을 계획하고 관리할 수
 있는 가장 중요한 기초 문서](https://docs.google.com/spreadsheets/d/1d2JO0KBQE9fXQ51-dqd_syQR3cCEJ8yWXrftlQvSgs8/edit#gid=0)
 
 (프로젝트 업무 일정입니다. 개발 일정에 따라 변경될 수 있습니다.)
