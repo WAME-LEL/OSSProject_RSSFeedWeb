@@ -112,8 +112,9 @@
                         {% for subsData in sub_list %}
                         <li>
                             {{subsData.link}}
+                            <!--                url 부분 수정 예정-->
+                            <a href="{%url 'sub'%}"><button>삭제</button></a>
                         </li>
-                        <br>
                         {% endfor %}
                     </ul>
                 </div>
