@@ -11,8 +11,8 @@ from django.utils import timezone
 import feedparser
 from bs4 import BeautifulSoup
 
-from RssFeedWeb.models import subsData
 from .forms import SubscribeForm
+from .models import subsData
 
 def rss_feed(request):
     # RSS 피드 주소
@@ -57,21 +57,23 @@ def rss_feed(request):
     # 템플릿 렌더링
     return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "paragraphs": paragraphs, "context": context})
 
-#구독 버튼, 돌아오는 버튼 이벤트
+#구독 버튼, 돌아오는 버튼 이벤트,구독기능
 def sub(request):
-    return render(request,'RssFeedWeb/sub.html')
-def back(request):
-    return render(request,'RssFeedWeb/rss_feed.html')
-#구독기능
-def LatestEntriesFeed(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
+
             form.save()
-            return redirect('http://localhost:8000/latest/feed/LatestEntriesFeed/')
+            return redirect('http://localhost:8000/latest/feed/sub/')
     else:
         form = SubscribeForm()
     return render(request, 'RssFeedWeb/sub.html', {'form': form})
+def back(request):
+    return render(request,'RssFeedWeb/rss_feed.html')
 
 def detail(request):
     return render(request,'RssFeedWeb/sub.html')
+def sublist(request):
+    sub_list=subsData.objects.all()
+    context={'sub_list':sub_list}
+    return render(request,'RssFeedWeb/test.html',context)

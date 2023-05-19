@@ -12,5 +12,5 @@ from . import views
 urlpatterns = [
     path('', views.rss_feed,name='rss_feed'),
     path('sub/',views.sub,name='sub'),
-    path('LatestEntriesFeed/', views.LatestEntriesFeed, name='LatestEntriesFeed'),
+    path('test/',views.sublist,name='sublist'),
 ]

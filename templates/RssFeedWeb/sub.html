@@ -95,25 +95,15 @@
                 </div>
 <!-- 구독기능 버튼 추가-->
                 <div class="container">
-                    <form action="{% url 'LatestEntriesFeed' %}" method="post">
+                    <form method="post" action="{% url 'sub' %}" >
                         {%csrf_token%}
                         {{form.as_p}}
                         <button type="submit" class="btn btn-primary">구독하기</button>
                         <br>
                     </form>
-                    {% if subsData_list %}
-                  <div>
-                     <ul>
-                           {%for subsData in subsData.objects.all%}
-                         <li>
-                             {{subsData.link}}
-                         </li>
-                         {%endfor%}
-                        </ul>
-                  </div>
-                {%else%}
-                    <p>아직 구독된 사이트가 없습니다.</p>
-                {%endif%}
+                    {%for form in form_list%}
+                        {{form.link}}
+                    {%endfor%}
                 </div>
 
             </div>
