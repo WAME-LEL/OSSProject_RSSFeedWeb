@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'RssFeedWeb.apps.RssfeedwebConfig',
+    'RssFeedWeb.apps.RssFeedWebConfig',
     'django.contrib.syndication',
     'django.contrib.admin',
     'django.contrib.auth',

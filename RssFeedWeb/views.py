@@ -62,12 +62,9 @@ def sub(request):
     return render(request,'RssFeedWeb/sub.html')
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
-<<<<<<< HEAD
-#def LatestEntriesFeed(request):
-#    subscribe = get_object_or_404(subsData, pk=subsData_id)
-#    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
-#    return redirect('RssFeedWeb:detail', subsData_id=subsData.id)
+
 def LatestEntriesFeed(request):
+    #리턴 전까지 이부분 수정하면 됨
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
@@ -75,12 +72,7 @@ def LatestEntriesFeed(request):
             return redirect('site_list')
     else:
         form = SubscribeForm()
-    return render(request, 'RssFeedWeb:detail.html', {'form': form})
-=======
-def LatestEntriesFeed(request, subsData_id):
-    subscribe = get_object_or_404(subsData, pk=subsData_id)
-    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
-    return redirect('RssFeedWeb:detail')
->>>>>>> c877e87b41866acac9a94eebeff54a37503069f7
+    return render(request, 'RssFeedWeb/sub.html', {'form': form})
+
 def detail(request):
     return render(request,'RssFeedWeb/sub.html')
