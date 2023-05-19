@@ -9,9 +9,8 @@
 
 from django.urls import path
 from . import views
-
 urlpatterns = [
     path('', views.rss_feed,name='rss_feed'),
     path('sub/',views.sub,name='sub'),
-    path('LatestEntriesFeed/<int:subsData_id>/', views.LatestEntriesFeed, name='LatestEntriesFeed'),
+    path('LatestEntriesFeed/', views.LatestEntriesFeed, name='LatestEntriesFeed'),
 ]
