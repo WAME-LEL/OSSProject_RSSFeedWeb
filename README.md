@@ -33,3 +33,7 @@
 
 (요구사항 정의서 초안입니다. 개발 진행에 따라 변경될 수 있습니다.)
 
+### WBS
+[(링크)(클릭) WBS 구글 스프레드 사이트 링크](https://docs.google.com/spreadsheets/d/1d2JO0KBQE9fXQ51-dqd_syQR3cCEJ8yWXrftlQvSgs8/edit#gid=0)
+
+(프로젝트 업무 일정입니다. 개발 일정에 따라 변경될 수 있습니다.)
