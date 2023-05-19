@@ -93,7 +93,7 @@
                 <div class="title_container">
                     구독 페이지
                 </div>
-
+<!-- 구독기능 버튼 추가-->
                 <div class="container">
                     <form action="{% url 'LatestEntriesFeed' %}" method="post">
                         {%csrf_token%}
@@ -101,8 +101,7 @@
                         <button type="submit" class="btn btn-primary">구독하기</button>
                         <br>
                     </form>
-
-                    {% if subsData%}
+                    {% if subsData_list %}
                   <div>
                      <ul>
                            {%for subsData in subsData.objects.all%}
