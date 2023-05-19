@@ -62,6 +62,7 @@ def sub(request):
     return render(request,'RssFeedWeb/sub.html')
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
+<<<<<<< HEAD
 #def LatestEntriesFeed(request):
 #    subscribe = get_object_or_404(subsData, pk=subsData_id)
 #    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
@@ -75,5 +76,11 @@ def LatestEntriesFeed(request):
     else:
         form = SubscribeForm()
     return render(request, 'RssFeedWeb:detail.html', {'form': form})
+=======
+def LatestEntriesFeed(request, subsData_id):
+    subscribe = get_object_or_404(subsData, pk=subsData_id)
+    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
+    return redirect('RssFeedWeb:detail')
+>>>>>>> c877e87b41866acac9a94eebeff54a37503069f7
 def detail(request):
     return render(request,'RssFeedWeb/sub.html')
