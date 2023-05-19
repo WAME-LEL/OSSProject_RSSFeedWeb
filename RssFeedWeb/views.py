@@ -65,6 +65,6 @@ def back(request):
 def LatestEntriesFeed(request, subsData_id):
     subscribe = get_object_or_404(subsData, pk=subsData_id)
     subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
-    return redirect('RssFeedWeb:detail', subsData_id=subsData.id)
+    return redirect('RssFeedWeb:detail')
 def detail(request):
     return render(request,'RssFeedWeb/sub.html')
