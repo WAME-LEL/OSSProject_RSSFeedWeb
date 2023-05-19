@@ -52,8 +52,6 @@ def rss_feed(request):
         'entries': entries
     }
 
-
-
     # 템플릿 렌더링
     return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "paragraphs": paragraphs, "context": context})
 
@@ -67,7 +65,10 @@ def sub(request):
             return redirect('http://localhost:8000/latest/feed/sub/')
     else:
         form = SubscribeForm()
-    return render(request, 'RssFeedWeb/sub.html', {'form': form})
+
+    sub_list = subsData.objects.all()
+
+    return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list})
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
 
