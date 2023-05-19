@@ -12,7 +12,7 @@ import feedparser
 from bs4 import BeautifulSoup
 
 from RssFeedWeb.models import subsData
-
+from .forms import SubscribeForm
 
 def rss_feed(request):
     # RSS 피드 주소
@@ -62,9 +62,18 @@ def sub(request):
     return render(request,'RssFeedWeb/sub.html')
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
-def LatestEntriesFeed(request, subsData_id):
-    subscribe = get_object_or_404(subsData, pk=subsData_id)
-    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
-    return redirect('RssFeedWeb:detail', subsData_id=subsData.id)
+#def LatestEntriesFeed(request):
+#    subscribe = get_object_or_404(subsData, pk=subsData_id)
+#    subscribe.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
+#    return redirect('RssFeedWeb:detail', subsData_id=subsData.id)
+def LatestEntriesFeed(request):
+    if request.method == 'POST':
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('site_list')
+    else:
+        form = SubscribeForm()
+    return render(request, 'RssFeedWeb:detail.html', {'form': form})
 def detail(request):
     return render(request,'RssFeedWeb/sub.html')
