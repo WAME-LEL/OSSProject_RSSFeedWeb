@@ -94,14 +94,27 @@
                     구독 페이지
                 </div>
 
-                <div class="post_container">
+                <div class="container">
                     <form action="{% url 'LatestEntriesFeed' %}" method="post">
                         {%csrf_token%}
-                        <textarea name="content" id="content" rows="3" cols="30"></textarea>
-                        <input type="submit" style="WIDTH : 30pt; HEIGHT : 35pt" value="추가">
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-primary">구독하기</button>
                         <br>
-                        <a href="{%url 'rss_feed'%}">돌아가기</a>
                     </form>
+
+                    {% if subsData%}
+                  <div>
+                     <ul>
+                           {%for subsData in subsData.objects.all%}
+                         <li>
+                             {{subsData.link}}
+                         </li>
+                         {%endfor%}
+                        </ul>
+                  </div>
+                {%else%}
+                    <p>아직 구독된 사이트가 없습니다.</p>
+                {%endif%}
                 </div>
 
 <!--                여기까지-->
