@@ -62,14 +62,13 @@ def sub(request):
     return render(request,'RssFeedWeb/sub.html')
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
-
+#구독기능
 def LatestEntriesFeed(request):
-    #리턴 전까지 이부분 수정하면 됨
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('site_list')
+            return redirect('http://localhost:8000/latest/feed/LatestEntriesFeed/')
     else:
         form = SubscribeForm()
     return render(request, 'RssFeedWeb/sub.html', {'form': form})
