@@ -82,4 +82,6 @@ def sublist(request):
 def RSS_Del(request,subsData_id):
     subscribe = get_object_or_404(subsData, pk=subsData_id)
     subscribe.delete()
-    return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
+    #return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    return redirect(previous_url)
