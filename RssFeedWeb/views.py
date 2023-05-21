@@ -17,9 +17,10 @@ from .models import subsData
 def rss_feed(request):
     # RSS 피드 주소
     # rss_url = "https://computer-science-student.tistory.com/rss"
-    rss_url = "https://joel-dev.site/rss"
-    subs_data = subsData.objects.last()
+    # rss_url = "https://joel-dev.site/rss"
+    subs_data = subsData.objects.first()
     url = subsData.objects.all()
+
     rss_url = subs_data.link
     # RSS 피드 파싱
     feed = feedparser.parse(rss_url)
@@ -70,8 +71,8 @@ def sub(request):
         form = SubscribeForm()
 
     sub_list = subsData.objects.all()
-
     return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list})
+
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
 
@@ -81,3 +82,10 @@ def sublist(request):
     sub_list=subsData.objects.all()
     context={'sub_list':sub_list}
     return render(request,'RssFeedWeb/test.html',context)
+
+def RSS_Del(request,subsData_id):
+    subscribe = get_object_or_404(subsData, pk=subsData_id)
+    subscribe.delete()
+    #return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    return redirect(previous_url)

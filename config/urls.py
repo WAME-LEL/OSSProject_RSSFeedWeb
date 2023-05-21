@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('latest/feed/', include('RssFeedWeb.urls')),
+    path('', include('RssFeedWeb.urls')),
 ]

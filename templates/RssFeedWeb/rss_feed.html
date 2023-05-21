@@ -30,7 +30,9 @@
 
 </nav>
 
-<div>{{url}}</div>
+{% for ob in url %}
+<div>{{ob.link}}</div>
+{% endfor %}
 
 
 <div id="layoutSidenav">
@@ -91,6 +93,8 @@
             <div class="container-fluid px-4">
 
                 <div>
+
+
                     <div class="m-3">
 
                         <div class="card">
