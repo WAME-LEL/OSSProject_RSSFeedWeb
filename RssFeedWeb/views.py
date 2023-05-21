@@ -18,6 +18,9 @@ def rss_feed(request):
     # RSS 피드 주소
     # rss_url = "https://computer-science-student.tistory.com/rss"
     rss_url = "https://joel-dev.site/rss"
+    subs_data = subsData.objects.last()
+    url = subsData.objects.all()
+    rss_url = subs_data.link
     # RSS 피드 파싱
     feed = feedparser.parse(rss_url)
 
@@ -53,7 +56,7 @@ def rss_feed(request):
     }
 
     # 템플릿 렌더링
-    return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "paragraphs": paragraphs, "context": context})
+    return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "paragraphs": paragraphs, "context": context, "url": url})
 
 #구독 버튼, 돌아오는 버튼 이벤트,구독기능
 def sub(request):
