@@ -78,3 +78,8 @@ def sublist(request):
     sub_list=subsData.objects.all()
     context={'sub_list':sub_list}
     return render(request,'RssFeedWeb/test.html',context)
+
+def RSS_Del(request):
+    subscribe = get_object_or_404(subsData, pk=subsData_id)
+    subscribe.delete()
+    return render(request, 'RssFeedWeb/sub.html', subsData_id=subsData.id)
