@@ -60,7 +60,7 @@ def sub(request):
         if form.is_valid():
 
             form.save()
-            return redirect('http://localhost:8000/latest/feed/sub/')
+            return redirect('http://localhost:8000/sub/')
     else:
         form = SubscribeForm()
 
