@@ -1,9 +1,5 @@
 # Create your views here.
 
-# def index(request):
-#     # context = {'question_list': list}
-#     return render(request, 'pybo/question_list.html')
-
 # views.py
 
 from django.shortcuts import render, get_object_or_404, redirect
@@ -16,8 +12,6 @@ from .models import subsData
 
 def rss_feed(request):
     # RSS 피드 주소
-    # rss_url = "https://computer-science-student.tistory.com/rss"
-    # rss_url = "https://joel-dev.site/rss"
     subs_data = subsData.objects.first()
     url = subsData.objects.all()
 
