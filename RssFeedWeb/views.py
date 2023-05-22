@@ -77,6 +77,7 @@ def sublist(request):
     context={'sub_list':sub_list}
     return render(request,'RssFeedWeb/test.html',context)
 
+#구독 취소 기능
 def RSS_Del(request,subsData_id):
     subscribe = get_object_or_404(subsData, pk=subsData_id)
     subscribe.delete()
