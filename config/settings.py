@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = ['https://rss-feed-web.fly.dev/']
+
 # Application definition
 
 INSTALLED_APPS = [
