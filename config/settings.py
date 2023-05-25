@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-w(+pr9kz=9_#swk$fpw42lo^vy3wgz%&j!xz9_-ozha7*&-^q&
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://rss-feed-web.fly.dev/", "https://rss-feed-web.fly.dev/sub/", "https://rss-feed-web.fly.dev"]
+CORS_ALLOWED_ORIGINS = ["https://rss-feed-web.fly.dev/", "https://rss-feed-web.fly.dev/sub/", "https://rss-feed-web.fly.dev"]
 
 # Application definition
 

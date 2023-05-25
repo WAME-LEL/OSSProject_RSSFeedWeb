@@ -96,7 +96,7 @@
                 <!-- 구독기능 버튼 추가-->
                 <div class="container">
                     <form method="post" action="{% url 'sub' %}">
-                        {%csrf_token%}
+                        {% csrf_token %}
                         {{form.as_p}}
                         <button type="submit" class="btn btn-primary">구독하기</button>
                         <br>

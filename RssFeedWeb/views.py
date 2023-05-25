@@ -7,12 +7,15 @@
 # views.py
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 import feedparser
 from bs4 import BeautifulSoup
 
+
 from .forms import SubscribeForm
 from .models import subsData
+
 
 def rss_feed(request):
     # RSS 피드 주소
@@ -24,8 +27,6 @@ def rss_feed(request):
     rss_url = subs_data.link
     # RSS 피드 파싱
     feed = feedparser.parse(rss_url)
-
-
 
     # 최신 글 하나 가져오기
     latest_entry = feed.entries[0]
@@ -57,35 +58,45 @@ def rss_feed(request):
     }
 
     # 템플릿 렌더링
-    return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "paragraphs": paragraphs, "context": context, "url": url})
+    return render(request, "RssFeedWeb/rss_feed.html",
+                  {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third,
+                   "paragraphs": paragraphs, "context": context, "url": url})
 
-#구독 버튼, 돌아오는 버튼 이벤트,구독기능
+
+# 구독 버튼, 돌아오는 버튼 이벤트,구독기능
+@csrf_protect
 def sub(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
-
             form.save()
-            return redirect('http://localhost:8000/latest/feed/sub/')
+            # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
+            return redirect('http://localhost:8000/sub/')        #로컬 호스트용
     else:
         form = SubscribeForm()
 
     sub_list = subsData.objects.all()
     return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list})
 
+
 def back(request):
-    return render(request,'RssFeedWeb/rss_feed.html')
+    return render(request, 'RssFeedWeb/rss_feed.html')
+
+
 
 def detail(request):
-    return render(request,'RssFeedWeb/sub.html')
-def sublist(request):
-    sub_list=subsData.objects.all()
-    context={'sub_list':sub_list}
-    return render(request,'RssFeedWeb/test.html',context)
+    return render(request, 'RssFeedWeb/sub.html')
 
-def RSS_Del(request,subsData_id):
+
+def sublist(request):
+    sub_list = subsData.objects.all()
+    context = {'sub_list': sub_list}
+    return render(request, 'RssFeedWeb/test.html', context)
+
+
+def RSS_Del(request, subsData_id):
     subscribe = get_object_or_404(subsData, pk=subsData_id)
     subscribe.delete()
-    #return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
+    # return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
     previous_url = request.META.get('HTTP_REFERER', '/')
     return redirect(previous_url)
