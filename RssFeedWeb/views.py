@@ -1,9 +1,5 @@
 # Create your views here.
 
-# def index(request):
-#     # context = {'question_list': list}
-#     return render(request, 'pybo/question_list.html')
-
 # views.py
 
 from django.shortcuts import render, get_object_or_404, redirect
@@ -19,8 +15,6 @@ from .models import subsData
 
 def rss_feed(request):
     # RSS 피드 주소
-    # rss_url = "https://computer-science-student.tistory.com/rss"
-    # rss_url = "https://joel-dev.site/rss"
     subs_data = subsData.objects.first()
     url = subsData.objects.all()
 
@@ -72,6 +66,7 @@ def sub(request):
             form.save()
             # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
             return redirect('http://localhost:8000/sub/')        #로컬 호스트용
+
     else:
         form = SubscribeForm()
 
@@ -87,7 +82,6 @@ def back(request):
 def detail(request):
     return render(request, 'RssFeedWeb/sub.html')
 
-
 def sublist(request):
     sub_list = subsData.objects.all()
     context = {'sub_list': sub_list}
@@ -95,6 +89,7 @@ def sublist(request):
 
 
 def RSS_Del(request, subsData_id):
+#구독 취소 기능
     subscribe = get_object_or_404(subsData, pk=subsData_id)
     subscribe.delete()
     # return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
