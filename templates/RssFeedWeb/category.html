@@ -22,7 +22,6 @@
 
 
     <!-- Navbar Brand-->
-
     <a class="navbar-brand ps-3" href="{%url 'rss_feed'%}">나의 PS(Personal rsS)파트너</a>
 
     <a class="btn btn-default mx-auto"></a>
@@ -31,18 +30,13 @@
 
 </nav>
 
-{% for ob in url %}
-<div>{{ob.link}}</div>
-{% endfor %}
-
-
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">Home</div>
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{%url 'rss_feed'%}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         To Home
                     </a>
