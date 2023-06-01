@@ -65,7 +65,8 @@ def sub(request):
         form = SubscribeForm()
 
     sub_list = subsData.objects.all()
-    return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list})
+    context = {'form': form, 'sub_list': sub_list}
+    return render(request, 'RssFeedWeb/sub.html', context)
 
 def back(request):
     return render(request,'RssFeedWeb/rss_feed.html')
