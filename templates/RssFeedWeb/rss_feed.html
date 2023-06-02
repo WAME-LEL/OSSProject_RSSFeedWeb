@@ -30,9 +30,9 @@
 
 </nav>
 
-{% for ob in url %}
-<div>{{ob.link}}</div>
-{% endfor %}
+<!--{% for ob in url %}-->
+<!--<div>{{ob.link}}</div>-->
+<!--{% endfor %}-->
 
 
 <div id="layoutSidenav">
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="sb-sidenav-menu-heading">subscribe</div>
-                    <a href="{%url 'sub'%}" class="btn btn-outline-success mx-3" role="button">구독 추가</a>
+                    <a href="{%url 'sub'%}" class="btn btn-outline-success mx-3" role="button">구독</a>
 
 
                 </div>
@@ -92,12 +92,11 @@
         <main>
             <div class="container-fluid px-4">
 
-                <div>
+                <div class=" d-flex flex-md-row flex-column">
 
 
-                    <div class="m-3">
-
-                        <div class="card">
+                    <div class="m-3 me-auto p-2" >
+                        <div class="card" style="width:370px; height:340px">
 
                             <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
 
@@ -127,8 +126,8 @@
                         </div>
                     </div>
 
-                    <div class="m-3">
-                        <div class="card">
+                    <div class="m-3 me-auto p-2">
+                        <div class="card" style="width:370px; height:340px">
                              <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{ second.title }} <span
@@ -157,8 +156,8 @@
                         </div>
                     </div>
 
-                    <div class="m-3">
-                        <div class="card">
+                    <div class="m-3 me-auto p-2">
+                        <div class="card" style="width:370px; height:340px">
                              <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{ third.title }} <span
