@@ -68,10 +68,13 @@ def sub(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
+
             form.save()
+
             # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
             return redirect('http://localhost:8000/sub/')        #로컬 호스트용
-
+        else :
+            print(form.errors) #폼 에러 출력
     else:
         form = SubscribeForm()
 
