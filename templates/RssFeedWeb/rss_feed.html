@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>RSS Feed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,8 @@
 
 
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href=" ">나의 PS(Personal rsS)파트너</a>
+
+    <a class="navbar-brand ps-3" href="{%url 'rss_feed'%}">나의 PS(Personal rsS)파트너</a>
 
     <a class="btn btn-default mx-auto"></a>
 
@@ -49,14 +50,19 @@
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                        aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Layouts
+                        구독한 목록
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                          data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                            {% for result in result %}
+                            {% for ob in url %}
+                            {% if forloop.parentloop.counter == forloop.counter %}
+                            <a href="{% url 'Sub_cate' ob.id %}">{{ result.feed.title }}</a>
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -90,107 +96,244 @@
 
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
+            <!--            <div class="container-fluid px-4">-->
+            <!--                &lt;!&ndash;                첫번째 줄&ndash;&gt;-->
+            <!--                <div class="border mt-4">-->
+            <!--                    <div class="h3 m-2 fw-bold text-dark">-->
+            <!--                        {{feed.feed.title}}-->
+            <!--                    </div>-->
 
-                <div class=" d-flex flex-md-row flex-column">
+            <!--                    <div class="overflow-auto d-flex flex-md-row flex-column">-->
 
 
-                    <div class="m-3 me-auto p-2" >
-                        <div class="card" style="width:370px; height:340px">
+            <!--                        <div class="m-3 me-auto p-2">-->
+            <!--                            <div class="card" style="width:370px; height:340px">-->
 
-                            <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
+            <!--                                <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span-->
+            <!--                                        class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>-->
 
 
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ latest_entry.title }} <span
-                                        class="badge bg-secondary">New</span></h5>
-                                <div class="card-text">
-                                    <div class="overflow-hidden" style="height:100px;">
-                                        <span class="badge text-bg-success">summary</span>
+            <!--                                <div class="card-body">-->
+            <!--                                    <h5 class="card-title fw-bold">{{ latest_entry.title }} <span-->
+            <!--                                            class="badge bg-secondary">New</span></h5>-->
+            <!--                                    <div class="card-text">-->
+            <!--                                        <div class="overflow-hidden" style="height:100px;">-->
+            <!--                                            <span class="badge text-bg-success">summary</span>-->
 
-                                        {% for entries in context.entries %}
-                                        {% if entries.title == latest_entry.title %}
-                                        {% for paragraph in entries.paragraphs %}
-                                        <span>{{ paragraph }}</span>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endfor %}
+            <!--                                            {% for entries in context.entries %}-->
+            <!--                                            {% if entries.title == latest_entry.title %}-->
+            <!--                                            {% for paragraph in entries.paragraphs %}-->
+            <!--                                            <span>{{ paragraph }}</span>-->
+            <!--                                            {% endfor %}-->
+            <!--                                            {% endif %}-->
+            <!--                                            {% endfor %}-->
+
+            <!--                                        </div>-->
+
+            <!--                                        <p>-->
+            <!--                                            <span class="badge text-bg-success">published</span>-->
+            <!--                                            &nbsp;{{ latest_entry.published }}</p>-->
+            <!--                                    </div>-->
+            <!--                                    <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="m-3 me-auto p-2">-->
+            <!--                            <div class="card" style="width:370px; height:340px">-->
+            <!--                                <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span-->
+            <!--                                        class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>-->
+            <!--                                <div class="card-body">-->
+            <!--                                    <h5 class="card-title fw-bold">{{ second.title }} <span-->
+            <!--                                            class="badge bg-secondary">New</span>-->
+            <!--                                    </h5>-->
+            <!--                                    <div class="card-text">-->
+            <!--                                        <div class="overflow-hidden" style="height:100px;">-->
+            <!--                                            <span class="badge text-bg-success">summary</span>-->
+
+            <!--                                            {% for entries in context.entries %}-->
+            <!--                                            {% if entries.title == second.title %}-->
+            <!--                                            {% for paragraph in entries.paragraphs %}-->
+            <!--                                            <span>{{ paragraph }}</span>-->
+            <!--                                            {% endfor %}-->
+            <!--                                            {% endif %}-->
+            <!--                                            {% endfor %}-->
+            <!--                                        </div>-->
+
+            <!--                                        <p>-->
+            <!--                                            <span class="badge text-bg-success">published</span>-->
+            <!--                                            &nbsp;{{ second.published }}</p>-->
+
+            <!--                                    </div>-->
+            <!--                                    <a href="{{ second.link }}" class="btn btn-primary">Go post</a>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="m-3 me-auto p-2">-->
+            <!--                            <div class="card" style="width:370px; height:340px">-->
+            <!--                                <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span-->
+            <!--                                        class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>-->
+            <!--                                <div class="card-body">-->
+            <!--                                    <h5 class="card-title fw-bold">{{ third.title }} <span-->
+            <!--                                            class="badge bg-secondary">New</span>-->
+            <!--                                    </h5>-->
+            <!--                                    <div class="card-text">-->
+
+
+            <!--                                        <div class="overflow-hidden" style="height:100px;">-->
+            <!--                                            <span class="badge text-bg-success">summary</span>-->
+            <!--                                            {% for entries in context.entries %}-->
+            <!--                                            {% if entries.title == third.title %}-->
+            <!--                                            {% for paragraph in entries.paragraphs %}-->
+            <!--                                            <span>{{ paragraph }}</span>-->
+            <!--                                            {% endfor %}-->
+            <!--                                            {% endif %}-->
+            <!--                                            {% endfor %}-->
+
+            <!--                                        </div>-->
+            <!--                                        <p>-->
+            <!--                                            <span class="badge text-bg-success">published</span>-->
+            <!--                                            &nbsp;{{ third.published }}</p>-->
+            <!--                                    </div>-->
+            <!--                                    <a href="{{ third.link }}" class="btn btn-primary">Go post</a>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!--                &lt;!&ndash;                첫번째 줄&ndash;&gt;-->
+
+            <!--            </div>-->
+
+            <div class="d-flex flex-row">
+
+
+                <div class="container-fluid px-4 ">
+                    {% for blogs in contextTest %}
+                    <div class="border border-2 mt-4 p-2 rounded-4" style="height: 505px">
+
+                        <div class="h3 m-2 fw-bold text-dark">
+                            {{blogs.blog}}
+
+                        </div>
+
+                        <div class="overflow-auto d-flex flex-row">
+
+                            <div class="m-3 me-auto p-2">
+                                <div class="card" style="width:370px; height:370px">
+
+                                    <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span
+                                            class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{blogs.blog}}</a>
+
+
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{ blogs.first.title }} <span
+                                                class="badge bg-secondary">New</span></h5>
+                                        <div class="card-text">
+                                            <div class="overflow-hidden" style="height:100px;">
+                                                <span class="badge text-bg-success">summary</span>
+
+                                                {% for content in blogs.entries.0.paragraphs %}
+                                                <span>{{content}}</span>
+                                                {% endfor %}
+
+                                            </div>
+
+                                            <p>
+                                                <span class="badge text-bg-success">published</span>
+                                                &nbsp;{{ blogs.first.published }}</p>
+                                        </div>
+                                        <a href="{{ blogs.first.link }}" class="btn btn-primary">Go post</a>
                                     </div>
-
-                                    <p>
-                                        <span class="badge text-bg-success">published</span>
-                                        &nbsp;{{ latest_entry.published }}</p>
                                 </div>
-                                <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>
                             </div>
+
+                            <div class="m-3 me-auto p-2">
+                                <div class="card" style="width:370px; height:370px">
+
+                                    <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span
+                                            class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{blogs.blog}}</a>
+
+
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{ blogs.second.title }} <span
+                                                class="badge bg-secondary">New</span></h5>
+                                        <div class="card-text">
+                                            <div class="overflow-hidden" style="height:100px;">
+                                                <span class="badge text-bg-success">summary</span>
+
+                                                {% for content in blogs.entries.1.paragraphs %}
+                                                <span>{{content}}</span>
+                                                {% endfor %}
+
+                                            </div>
+
+                                            <p>
+                                                <span class="badge text-bg-success">published</span>
+                                                &nbsp;{{ blogs.second.published }}</p>
+                                        </div>
+                                        <a href="{{ blogs.second.link }}" class="btn btn-primary">Go post</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="m-3 me-auto p-2">
+                                <div class="card" style="width:370px; height:370px">
+
+                                    <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span
+                                            class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{blogs.blog}}</a>
+
+
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{ blogs.third.title }} <span
+                                                class="badge bg-secondary">New</span></h5>
+                                        <div class="card-text">
+                                            <div class="overflow-hidden" style="height:100px;">
+                                                <span class="badge text-bg-success">summary</span>
+
+                                                {% for content in blogs.entries.2.paragraphs %}
+                                                <span>{{content}}</span>
+                                                {% endfor %}
+
+                                            </div>
+
+                                            <p>
+                                                <span class="badge text-bg-success">published</span>
+                                                &nbsp;{{ blogs.third.published }}</p>
+                                        </div>
+                                        <a href="{{ blogs.third.link }}" class="btn btn-primary">Go post</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="w-100 h-auto">
+                    <div class="container-fluid px-4 ">
+                        <div class="border border-2 mt-4 p-2 rounded-4">
+                            추가기능
                         </div>
                     </div>
 
-                    <div class="m-3 me-auto p-2">
-                        <div class="card" style="width:370px; height:340px">
-                             <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ second.title }} <span
-                                        class="badge bg-secondary">New</span>
-                                </h5>
-                                <div class="card-text">
-                                    <div class="overflow-hidden" style="height:100px;">
-                                        <span class="badge text-bg-success">summary</span>
+                    <div class="container-fluid px-4 h-100">
+                        <div class="border border-2 mt-4 p-2 rounded-4">
 
-                                        {% for entries in context.entries %}
-                                        {% if entries.title == second.title %}
-                                        {% for paragraph in entries.paragraphs %}
-                                        <span>{{ paragraph }}</span>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endfor %}
-                                    </div>
-
-                                    <p>
-                                        <span class="badge text-bg-success">published</span>
-                                        &nbsp;{{ second.published }}</p>
-
-                                </div>
-                                <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
-                            </div>
                         </div>
                     </div>
 
-                    <div class="m-3 me-auto p-2">
-                        <div class="card" style="width:370px; height:340px">
-                             <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ third.title }} <span
-                                        class="badge bg-secondary">New</span>
-                                </h5>
-                                <div class="card-text">
-
-
-                                    <div class="overflow-hidden" style="height:100px;">
-                                        <span class="badge text-bg-success">summary</span>
-                                        {% for entries in context.entries %}
-                                        {% if entries.title == third.title %}
-                                        {% for paragraph in entries.paragraphs %}
-                                        <span>{{ paragraph }}</span>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endfor %}
-
-                                    </div>
-
-
-                                    <p>
-                                        <span class="badge text-bg-success">published</span>
-                                        &nbsp;{{ third.published }}</p>
-
-                                </div>
-                                <a href="{{ third.link }}" class="btn btn-primary">Go post</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
         </main>
+
 
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
