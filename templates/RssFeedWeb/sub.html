@@ -97,7 +97,7 @@
                     <form method="post" action="{% url 'sub' %}" class="my-3">
                         {% csrf_token %}
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="구독 사이트 주소를 입력해주세요" aria-label="subscribe_textview" aria-describedby="button-addon2" value="{{ form.link.value|default_if_none:'' }}" {{ form.errors }}>
+                            <input type="text" class="form-control" placeholder="구독 사이트 주소를 입력해주세요" aria-label="subscribe_textview" aria-describedby="button-addon2" name="link" value="{{ form.link.value|default_if_none:'' }}" {{ form.errors }}>
                             <button class="btn btn-outline-secondary" type="submit" id="button-addon2">구독</button>
                         </div>
                     </form>

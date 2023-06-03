@@ -111,7 +111,7 @@ def sub(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
-
+            print(form.cleaned_data)
             form.save()
 
             # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용

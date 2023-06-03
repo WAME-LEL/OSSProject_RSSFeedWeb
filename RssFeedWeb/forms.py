@@ -2,6 +2,7 @@ from django import forms
 from .models import subsData
 
 class SubscribeForm(forms.ModelForm):
+    link = forms.CharField(max_length=200, required=False)
     class Meta:
         model = subsData
         fields = ['link', 'date']
@@ -9,6 +10,13 @@ class SubscribeForm(forms.ModelForm):
         widgets = {
             'date': forms.DateTimeInput(attrs={'class': 'form-control'}),
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        link_value = self.data.get('link')
+        if link_value and link_value.strip() == '':
+            self.data['link'] = ''
+        return cleaned_data
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
