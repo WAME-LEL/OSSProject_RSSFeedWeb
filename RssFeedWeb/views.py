@@ -14,12 +14,15 @@ def rss_feed(request):
     # RSS 피드 주소
     subs_data = subsData.objects.first()
     url = subsData.objects.all()
+    result=[]
+    for sub in url:
+        rss_Url = sub.link
+        subList = feedparser.parse(rss_Url)
+        result.append(subList)
 
     rss_url = subs_data.link
     # RSS 피드 파싱
     feed = feedparser.parse(rss_url)
-
-
 
     # 최신 글 하나 가져오기
     latest_entry = feed.entries[0]
@@ -51,7 +54,9 @@ def rss_feed(request):
     }
 
     # 템플릿 렌더링
-    return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "paragraphs": paragraphs, "context": context, "url": url})
+    return render(request, "RssFeedWeb/rss_feed.html",
+                  {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third,
+                   "paragraphs": paragraphs, "context": context, "url": url,"result":result})
 
 #구독 버튼, 돌아오는 버튼 이벤트,구독기능
 def sub(request):
@@ -82,6 +87,5 @@ def sublist(request):
 def RSS_Del(request,subsData_id):
     subscribe = get_object_or_404(subsData, pk=subsData_id)
     subscribe.delete()
-    #return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
     previous_url = request.META.get('HTTP_REFERER', '/')
     return redirect(previous_url)
