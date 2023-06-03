@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Subscribe</title>
+    <title>구독 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
@@ -30,10 +30,6 @@
 
 </nav>
 
-{% for ob in url %}
-<div>{{ob.link}}</div>
-{% endfor %}
-
 
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -41,7 +37,7 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">Home</div>
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{%url 'rss_feed'%}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         To Home
                     </a>
@@ -88,31 +84,41 @@
         </nav>
     </div>
 
+
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <!-- 구독 기능 -->
+
+                <!--내용은 여기부터-->
+                <div class="title_container">
+                    구독 페이지
+                </div>
+                <!-- 구독기능 버튼 추가-->
                 <div class="container">
-                    <form method="post" action="{% url 'sub' %}" class="my-3">
+                    <form method="post" action="{% url 'sub' %}">
                         {% csrf_token %}
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="구독 사이트 주소를 입력해주세요" aria-label="subscribe_textview" aria-describedby="button-addon2" value="{{ form.link.value|default_if_none:'' }}">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">구독</button>
-                        </div>
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-primary">구독하기</button>
+                        <br>
                     </form>
+                    {%for form in form_list%}
+                    {{form.link}}
+                    {%endfor%}
                 </div>
 
-                <!-- 구독현황 확인 -->
-                {% for subsData in sub_list %}
-                <div class="card mb-3">
-                    <a href="{{ feed.feed.link }}" class="card-header fs-5 text-decoration-none"><span class="badge rounded-pill text-bg-primary">구독정보</span>&nbsp;{{ feed.feed.title }}</a>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
-                           data-uri="{% url 'RSS_Del' subsData.id  %}">구독취소</a>
-                    </div>
+
+                <div>
+                    <ul>
+                        {% for subsData in sub_list %}
+                        <li>
+                            {{subsData.link}}
+                            <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+                                data-uri="{% url 'RSS_Del' subsData.id  %}">삭제</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                {% endfor %}
+
             </div>
         </main>
 
@@ -126,21 +132,26 @@
 
     </div>
 </div>
+
+<!-- 자바스크립트 Start -->
+{% block script %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-{% block script %}
+
 <script type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
 Array.from(delete_elements).forEach(function(element) {
     element.addEventListener('click', function() {
-        if(confirm("정말로 구독을 취소하겠습니까?")) {
+        if(confirm("정말로 삭제하시겠습니까?")) {
             location.href = this.dataset.uri;
         };
     });
 });
 </script>
 {% endblock %}
+<!-- 자바스크립트 End -->
 
 </body>
+
 </html>
