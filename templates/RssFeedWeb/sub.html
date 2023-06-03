@@ -97,10 +97,15 @@
                     <form method="post" action="{% url 'sub' %}" class="my-3">
                         {% csrf_token %}
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="구독 사이트 주소를 입력해주세요" aria-label="subscribe_textview" aria-describedby="button-addon2" name="link" value="{{ form.link.value|default_if_none:'' }}" {{ form.errors }}>
+                            <input type="text" class="form-control" placeholder="구독 사이트 주소를 입력해주세요" aria-label="subscribe_textview" aria-describedby="button-addon2" name="link" value="{{ form.link.value|default_if_none:'' }}">
                             <button class="btn btn-outline-secondary" type="submit" id="button-addon2">구독</button>
                         </div>
                     </form>
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            이미 구독한 사이트입니다!
+</                      div>
+                    {% endif %}
                 </div>
 
                 {% for subsData in sub_list %}
@@ -134,7 +139,9 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+
 {% block script %}
 <script type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
