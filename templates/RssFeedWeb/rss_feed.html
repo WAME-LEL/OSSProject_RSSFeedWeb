@@ -31,10 +31,6 @@
 
 </nav>
 
-<!--{% for ob in url %}-->
-<!--<div>{{ob.link}}</div>-->
-<!--{% endfor %}-->
-
 
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -42,7 +38,7 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">Home</div>
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{%url 'rss_feed'%}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         To Home
                     </a>
@@ -96,119 +92,7 @@
 
     <div id="layoutSidenav_content">
         <main>
-            <!--            <div class="container-fluid px-4">-->
-            <!--                &lt;!&ndash;                첫번째 줄&ndash;&gt;-->
-            <!--                <div class="border mt-4">-->
-            <!--                    <div class="h3 m-2 fw-bold text-dark">-->
-            <!--                        {{feed.feed.title}}-->
-            <!--                    </div>-->
-
-            <!--                    <div class="overflow-auto d-flex flex-md-row flex-column">-->
-
-
-            <!--                        <div class="m-3 me-auto p-2">-->
-            <!--                            <div class="card" style="width:370px; height:340px">-->
-
-            <!--                                <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span-->
-            <!--                                        class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>-->
-
-
-            <!--                                <div class="card-body">-->
-            <!--                                    <h5 class="card-title fw-bold">{{ latest_entry.title }} <span-->
-            <!--                                            class="badge bg-secondary">New</span></h5>-->
-            <!--                                    <div class="card-text">-->
-            <!--                                        <div class="overflow-hidden" style="height:100px;">-->
-            <!--                                            <span class="badge text-bg-success">summary</span>-->
-
-            <!--                                            {% for entries in context.entries %}-->
-            <!--                                            {% if entries.title == latest_entry.title %}-->
-            <!--                                            {% for paragraph in entries.paragraphs %}-->
-            <!--                                            <span>{{ paragraph }}</span>-->
-            <!--                                            {% endfor %}-->
-            <!--                                            {% endif %}-->
-            <!--                                            {% endfor %}-->
-
-            <!--                                        </div>-->
-
-            <!--                                        <p>-->
-            <!--                                            <span class="badge text-bg-success">published</span>-->
-            <!--                                            &nbsp;{{ latest_entry.published }}</p>-->
-            <!--                                    </div>-->
-            <!--                                    <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-
-            <!--                        <div class="m-3 me-auto p-2">-->
-            <!--                            <div class="card" style="width:370px; height:340px">-->
-            <!--                                <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span-->
-            <!--                                        class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>-->
-            <!--                                <div class="card-body">-->
-            <!--                                    <h5 class="card-title fw-bold">{{ second.title }} <span-->
-            <!--                                            class="badge bg-secondary">New</span>-->
-            <!--                                    </h5>-->
-            <!--                                    <div class="card-text">-->
-            <!--                                        <div class="overflow-hidden" style="height:100px;">-->
-            <!--                                            <span class="badge text-bg-success">summary</span>-->
-
-            <!--                                            {% for entries in context.entries %}-->
-            <!--                                            {% if entries.title == second.title %}-->
-            <!--                                            {% for paragraph in entries.paragraphs %}-->
-            <!--                                            <span>{{ paragraph }}</span>-->
-            <!--                                            {% endfor %}-->
-            <!--                                            {% endif %}-->
-            <!--                                            {% endfor %}-->
-            <!--                                        </div>-->
-
-            <!--                                        <p>-->
-            <!--                                            <span class="badge text-bg-success">published</span>-->
-            <!--                                            &nbsp;{{ second.published }}</p>-->
-
-            <!--                                    </div>-->
-            <!--                                    <a href="{{ second.link }}" class="btn btn-primary">Go post</a>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-
-            <!--                        <div class="m-3 me-auto p-2">-->
-            <!--                            <div class="card" style="width:370px; height:340px">-->
-            <!--                                <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span-->
-            <!--                                        class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>-->
-            <!--                                <div class="card-body">-->
-            <!--                                    <h5 class="card-title fw-bold">{{ third.title }} <span-->
-            <!--                                            class="badge bg-secondary">New</span>-->
-            <!--                                    </h5>-->
-            <!--                                    <div class="card-text">-->
-
-
-            <!--                                        <div class="overflow-hidden" style="height:100px;">-->
-            <!--                                            <span class="badge text-bg-success">summary</span>-->
-            <!--                                            {% for entries in context.entries %}-->
-            <!--                                            {% if entries.title == third.title %}-->
-            <!--                                            {% for paragraph in entries.paragraphs %}-->
-            <!--                                            <span>{{ paragraph }}</span>-->
-            <!--                                            {% endfor %}-->
-            <!--                                            {% endif %}-->
-            <!--                                            {% endfor %}-->
-
-            <!--                                        </div>-->
-            <!--                                        <p>-->
-            <!--                                            <span class="badge text-bg-success">published</span>-->
-            <!--                                            &nbsp;{{ third.published }}</p>-->
-            <!--                                    </div>-->
-            <!--                                    <a href="{{ third.link }}" class="btn btn-primary">Go post</a>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-
-            <!--                &lt;!&ndash;                첫번째 줄&ndash;&gt;-->
-
-            <!--            </div>-->
-
             <div class="d-flex flex-row">
-
 
                 <div class="container-fluid px-4 ">
                     {% for blogs in contextTest %}
@@ -222,7 +106,6 @@
                         <div class="overflow-auto d-flex flex-row">
 
                             {% if blogs.entries.0.paragraphs %}
-<!--                            <p>{{blogs.entries.0.paragraphs}}</p>-->
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
@@ -328,12 +211,47 @@
                 <div class="w-100 h-auto">
                     <div class="container-fluid px-4 ">
                         <div class="border border-2 mt-4 p-2 rounded-4">
-                            추가기능
+                            기능
                         </div>
                     </div>
 
-                    <div class="container-fluid px-4 h-100">
+                    <div class="container-fluid px-4">
                         <div class="border border-2 mt-4 p-2 rounded-4">
+                            <div class="form-group">
+                                <label for="days-select">날짜 선택:</label>
+                                <select class="form-control" id="days-select" onchange="location = this.value;">
+                                    <option value="?days=1">어제</option>
+                                    <option value="?days=0">오늘</option>
+                                    <option value="?days=7">최근 7일</option>
+                                    <option value="?days=30">최근 30일</option>
+                                    <option value="?days=90">최근 3개월</option>
+                                    <option value="?days=365">최근 1년</option>
+                                </select>
+                            </div>
+
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <label for="days-input">상세 선택:</label>
+                                    <input type="text" class="form-control" id="days-input" name="days"
+                                           value="{{ selected_days }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">적용</button>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="container-fluid px-4">
+                        <div class="border border-2 mt-4 p-2 rounded-4">
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="container-fluid px-4">
+                        <div class="border border-2 mt-4 p-2 rounded-4">
+
 
                         </div>
                     </div>

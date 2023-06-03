@@ -16,9 +16,11 @@ from datetime import datetime, timedelta
 def rss_feed(request):
     # RSS 피드 주소
 
+
     if subsData.objects.exists():
         today = datetime.now().date()
-        yesterday = today - timedelta(days=10)
+        selected_days = int(request.GET.get('days', 30))
+
 
         subs_data = subsData.objects.first()
         urls = subsData.objects.all()
@@ -29,7 +31,6 @@ def rss_feed(request):
             subList = feedparser.parse(rss_Url)
             result.append(subList)
 
-        rss_url = subs_data.link
         # RSS 피드 파싱
         feed = result[0]
 
@@ -48,9 +49,9 @@ def rss_feed(request):
             for entry in blog.entries:
                 published_date = datetime.strptime(entry.published,
                                                    "%a, %d %b %Y %H:%M:%S %z").date() if entry.published else None
+
+                yesterday = today - timedelta(days=selected_days)
                 if published_date and yesterday <= published_date <= today:
-                    print(published_date)
-                    print(blog.feed.title)
                     if i >= 3:
                         break
                         # 항목의 내용(content)에서 <p> 태그의 데이터만 추출
@@ -78,9 +79,7 @@ def rss_feed(request):
 
         # 템플릿 렌더링
         return render(request, "RssFeedWeb/rss_feed.html",
-                      {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third,
-                       "paragraphs": paragraphs, "url": urls, "result": result,
-                       'contextTest': contextTest})
+                      {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest})
     else:
         return render(request, "RssFeedWeb/empty.html")
 
@@ -98,7 +97,7 @@ def sub(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
-
+            print(form.cleaned_data)
             form.save()
 
             # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
