@@ -212,7 +212,7 @@
 
                 <div class="container-fluid px-4 ">
                     {% for blogs in contextTest %}
-                    <div class="border border-2 mt-4 p-2 rounded-4" style="height: 505px">
+                    <div class="border border-2 mt-4 p-2 rounded-4">
 
                         <div class="h3 m-2 fw-bold text-dark">
                             {{blogs.blog}}
@@ -221,6 +221,8 @@
 
                         <div class="overflow-auto d-flex flex-row">
 
+                            {% if blogs.entries.0.paragraphs %}
+<!--                            <p>{{blogs.entries.0.paragraphs}}</p>-->
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
@@ -249,7 +251,10 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
 
+
+                            {% if blogs.entries.1.paragraphs %}
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
@@ -278,7 +283,10 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
 
+
+                            {% if blogs.entries.2.paragraphs %}
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
@@ -307,6 +315,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
 
 

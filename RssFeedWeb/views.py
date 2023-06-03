@@ -10,12 +10,16 @@ from bs4 import BeautifulSoup
 
 from .forms import SubscribeForm
 from .models import subsData
+from datetime import datetime, timedelta
 
 
 def rss_feed(request):
     # RSS 피드 주소
 
     if subsData.objects.exists():
+        today = datetime.now().date()
+        yesterday = today - timedelta(days=10)
+
         subs_data = subsData.objects.first()
         urls = subsData.objects.all()
         result = []
@@ -42,52 +46,35 @@ def rss_feed(request):
             i = 0
 
             for entry in blog.entries:
-                if i >= 3:
-                    break
-                # 항목의 내용(content)에서 <p> 태그의 데이터만 추출
-                content = entry.description
-                soup = BeautifulSoup(content, 'html.parser')
-                p_tags = soup.find_all('p')
+                published_date = datetime.strptime(entry.published,
+                                                   "%a, %d %b %Y %H:%M:%S %z").date() if entry.published else None
+                if published_date and yesterday <= published_date <= today:
+                    print(published_date)
+                    print(blog.feed.title)
+                    if i >= 3:
+                        break
+                        # 항목의 내용(content)에서 <p> 태그의 데이터만 추출
+                    content = entry.description
+                    soup = BeautifulSoup(content, 'html.parser')
+                    p_tags = soup.find_all('p')
 
-                paragraphs = []
+                    paragraphs = []
 
-                # <p> 태그의 데이터를 paragraphs 리스트에 추가
-                for p in p_tags:
-                    if p.string != '\xa0' and p.string is not None:  # &nbsp; 태그 거르기
-                        paragraphs.append(p.string)
+                    # <p> 태그의 데이터를 paragraphs 리스트에 추가
+                    for p in p_tags:
+                        if p.string != '\xa0' and p.string is not None:  # &nbsp; 태그 거르기
+                            paragraphs.append(p.string)
 
-                entries.append({
-                    'title': entry.title,
-                    'paragraphs': paragraphs
-                })
+                    entries.append({
+                        'title': entry.title,
+                        'paragraphs': paragraphs
+                    })
 
-                i = i + 1
+                    i = i + 1
 
-            contextTest.append({'entries': entries, 'blog': blog.feed.title, 'first': blog.entries[0], 'second': blog.entries[1], 'third': blog.entries[2]})
-
-        # entries = []
-        #
-        # for entry in feed.entries:
-        #     # 항목의 내용(content)에서 <p> 태그의 데이터만 추출
-        #     content = entry.description
-        #     soup = BeautifulSoup(content, 'html.parser')
-        #     p_tags = soup.find_all('p')
-        #
-        #     paragraphs = []
-        #
-        #     # <p> 태그의 데이터를 paragraphs 리스트에 추가
-        #     for p in p_tags:
-        #         if p.string != '\xa0' and p.string is not None:  # &nbsp; 태그 거르기
-        #             paragraphs.append(p.string)
-        #
-        #     entries.append({
-        #         'title': entry.title,
-        #         'paragraphs': paragraphs
-        #     })
-        #
-        # context = {
-        #     'entries': entries
-        # }
+            contextTest.append(
+                {'entries': entries, 'blog': blog.feed.title, 'first': blog.entries[0], 'second': blog.entries[1],
+                 'third': blog.entries[2]})
 
         # 템플릿 렌더링
         return render(request, "RssFeedWeb/rss_feed.html",
@@ -115,14 +102,14 @@ def sub(request):
             form.save()
 
             # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
-            return redirect('http://localhost:8000/sub/')        #로컬 호스트용
-        else :
-            print(form.errors) #폼 에러 출력
+            return redirect('http://localhost:8000/sub/')  # 로컬 호스트용
+        else:
+            print(form.errors)  # 폼 에러 출력
     else:
         form = SubscribeForm()
 
     sub_list = subsData.objects.all()
-    return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list, "result" : result, "url":url})
+    return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list, "result": result, "url": url})
 
 
 def back(request):

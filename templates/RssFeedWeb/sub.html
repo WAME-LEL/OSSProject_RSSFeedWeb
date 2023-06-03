@@ -30,10 +30,6 @@
 
 </nav>
 
-{% for ob in url %}
-<div>{{ob.link}}</div>
-{% endfor %}
-
 
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -107,18 +103,22 @@
                     </form>
                 </div>
 
-                <!-- 구독현황 확인 -->
                 {% for subsData in sub_list %}
-                <div class="card mb-3">
-                    <a href="{{ feed.feed.link }}" class="card-header fs-5 text-decoration-none"><span class="badge rounded-pill text-bg-primary"></span>구독사이트 제목 : &nbsp;{{ feed.feed.title }}</a>
-                    <div class="card-body">
-                        <h5 class="card-title">사이트 링크 : {{ subsData.link }}</h5>
-                        <p class="card-text">구독일 : {{ subsData.date }}</p> <!-- 구독한 날짜 표시 -->
-                        <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
-                           data-uri="{% url 'RSS_Del' subsData.id  %}">구독취소</a>
-                    </div>
+                 <div class="card mb-3">
+                    {% for result in result %}
+                            {% if forloop.parentloop.counter == forloop.counter %}
+                                <a href="{{ feed.feed.link }}" class="card-header fs-5 text-decoration-none"><span class="badge rounded-pill text-bg-primary"></span>구독사이트 제목 : &nbsp;{{ result.feed.title }}</a>
+                                <div class="card-body">
+                                 <h5 class="card-title">사이트 링크 : {{ subsData.link }}</h5>
+                                <p class="card-text">구독일 : {{ subsData.date }}</p> <!-- 구독한 날짜 표시 -->
+                                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+                                 data-uri="{% url 'RSS_Del' subsData.id  %}">구독취소</a>
+                                </div>
+                            {% endif %}
+                    {% endfor %}
                 </div>
                 {% endfor %}
+
             </div>
         </main>
 
