@@ -65,6 +65,13 @@ def rss_feed(request):
 # 구독 버튼, 돌아오는 버튼 이벤트,구독기능
 @csrf_protect
 def sub(request):
+    url = subsData.objects.all()
+    result = []
+    for sub in url:
+        rss_Url = sub.link
+        subList = feedparser.parse(rss_Url)
+        result.append(subList)
+
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
@@ -79,7 +86,7 @@ def sub(request):
         form = SubscribeForm()
 
     sub_list = subsData.objects.all()
-    return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list})
+    return render(request, 'RssFeedWeb/sub.html', {'form': form, 'sub_list': sub_list, "result" : result, "url":url})
 
 
 def back(request):
