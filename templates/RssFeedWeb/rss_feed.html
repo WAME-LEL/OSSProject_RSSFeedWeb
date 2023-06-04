@@ -55,7 +55,7 @@
                             {% for result in result %}
                             {% for ob in url %}
                             {% if forloop.parentloop.counter == forloop.counter %}
-                            <a href="{% url 'Sub_cate' ob.id %}">{{ result.feed.title }}</a>
+                            <a href="{% url 'Sub_cate' ob.id %}" style="text-decoration:none;padding:5px;">{{ result.feed.title }}</a>
                             {% endif %}
                             {% endfor %}
                             {% endfor %}

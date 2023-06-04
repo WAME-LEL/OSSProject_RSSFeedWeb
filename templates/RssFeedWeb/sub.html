@@ -54,7 +54,7 @@
                             {% for result in result %}
                                 {% for ob in url %}
                                      {% if forloop.parentloop.counter == forloop.counter %}
-                                         <a href="{% url 'Sub_cate' ob.id %}">{{ result.feed.title }}</a>
+                                         <a href="{% url 'Sub_cate' ob.id %}" style="text-decoration:none;padding:5px;">{{ result.feed.title }}</a>
                                     {% endif %}
                                  {% endfor %}
                             {% endfor %}
@@ -104,7 +104,7 @@
                     {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
                             이미 구독한 사이트입니다!
-</                      div>
+                         </div>
                     {% endif %}
                 </div>
 
