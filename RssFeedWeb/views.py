@@ -19,7 +19,11 @@ def rss_feed(request):
 
     if subsData.objects.exists():
         today = datetime.now().date()
-        selected_days = int(request.GET.get('days', 0))
+        try:
+            selected_days = int(request.GET.get('days', 0))
+        except:
+            selected_days = 0
+
 
 
         subs_data = subsData.objects.first()
