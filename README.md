@@ -24,7 +24,7 @@
 
 ### 예시 이미지
 
-<img src="https://github.com/WAME-LEL/OSSProject_RSSFeedWeb/assets/56767018/c34029a1-279a-4450-bbd1-79bf4d9428fd"  width="700" height="500">
+<img src="https://github.com/WAME-LEL/OSSProject_RSSFeedWeb/assets/56767018/3fff1058-be6e-4635-940a-f4bed3fe1826"  width="700" height="400">
 
 (개발 전 예시 이미지입니다. 개발이 완료되면 교체 예정)
 
