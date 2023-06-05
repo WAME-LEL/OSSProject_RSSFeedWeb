@@ -112,9 +112,9 @@
                  <div class="card mb-3">
                     {% for result in result %}
                             {% if forloop.parentloop.counter == forloop.counter %}
-                                <a href="{{ feed.feed.link }}" class="card-header fs-5 text-decoration-none"><span class="badge rounded-pill text-bg-primary"></span>구독사이트 제목 : &nbsp;{{ result.feed.title }}</a>
+                                <h5 class="card-header fs-5 text-decoration-none"><span class="badge rounded-pill text-bg-primary"></span>구독사이트 제목 : &nbsp;{{ result.feed.title }}</h5>
                                 <div class="card-body">
-                                 <h5 class="card-title">사이트 링크 : {{ subsData.link }}</h5>
+                                 <h5 class="card-title">사이트 링크 : <a href="{{ result.feed.link }}" class="card-text" style="text-decoration:none;"><span class="badge rounded-pill text-bg-primary"></span>{{ subsData.link }}</a></h5>
                                 <p class="card-text">구독일 : {{ subsData.date }}</p> <!-- 구독한 날짜 표시 -->
                                 <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
                                  data-uri="{% url 'RSS_Del' subsData.id  %}">구독취소</a>
