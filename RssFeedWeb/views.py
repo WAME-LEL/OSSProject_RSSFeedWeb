@@ -63,12 +63,24 @@ def rss_feed(request):
                     soup = BeautifulSoup(content, 'html.parser')
                     p_tags = soup.find_all('p')
 
+
                     paragraphs = []
 
                     # <p> 태그의 데이터를 paragraphs 리스트에 추가
                     for p in p_tags:
                         if p.string != '\xa0' and p.string is not None:  # &nbsp; 태그 거르기
                             paragraphs.append(p.string)
+
+                    if not paragraphs:
+                        paragraphs.append(content)
+                        print(content)
+
+                    if paragraphs[0] == '':
+                        newsValue = entry.content[0].value
+                        soup = BeautifulSoup(newsValue, 'html.parser')
+                        newsSummary = soup.find_all('p')
+                        newsSummary = [p.get_text() for p in newsSummary]
+                        paragraphs.append(newsSummary[0])
 
                     entries.append({
                         'title': entry.title,
@@ -103,8 +115,8 @@ def sub(request):
             print(form.cleaned_data)
             form.save()
 
-            return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
-            # return redirect('http://localhost:8000/sub/')  # 로컬 호스트용
+            # return redirect('https://rss-feed-web.fly.dev/sub/')    #배포 서버용
+            return redirect('http://localhost:8000/sub/')  # 로컬 호스트용
         else:
             print(form.errors)  # 폼 에러 출력
     else:
