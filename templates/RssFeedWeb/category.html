@@ -189,6 +189,67 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="m-3">
+                        <div class="card">
+                             <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ four.title }} <span
+                                        class="badge bg-secondary">New</span>
+                                </h5>
+                                <div class="card-text">
+                                    <div class="overflow-hidden" style="height:100px;">
+                                        <span class="badge text-bg-success">summary</span>
+
+                                        {% for entries in context.entries %}
+                                        {% if entries.title == four.title %}
+                                        {% for paragraph in entries.paragraphs %}
+                                        <span>{{ paragraph }}</span>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <p>
+                                        <span class="badge text-bg-success">published</span>
+                                        &nbsp;{{ four.published }}</p>
+
+                                </div>
+                                <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-3">
+                        <div class="card">
+                             <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{feed.feed.title}}</a>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ five.title }} <span
+                                        class="badge bg-secondary">New</span>
+                                </h5>
+                                <div class="card-text">
+                                    <div class="overflow-hidden" style="height:100px;">
+                                        <span class="badge text-bg-success">summary</span>
+
+                                        {% for entries in context.entries %}
+                                        {% if entries.title == five.title %}
+                                        {% for paragraph in entries.paragraphs %}
+                                        <span>{{ paragraph }}</span>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <p>
+                                        <span class="badge text-bg-success">published</span>
+                                        &nbsp;{{ five.published }}</p>
+
+                                </div>
+                                <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>

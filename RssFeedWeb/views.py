@@ -165,6 +165,8 @@ def Sub_cate(request, ob_id):
     latest_entry = feed.entries[0]
     second = feed.entries[1]
     third = feed.entries[2]
+    four = feed.entries[3]
+    five = feed.entries[4]
 
     entries = []
 
@@ -180,6 +182,17 @@ def Sub_cate(request, ob_id):
         for p in p_tags:
             if p.string != '\xa0' and p.string is not None:  # &nbsp; 태그 거르기
                 paragraphs.append(p.string)
+        if not paragraphs:
+            paragraphs.append(content)
+            print(content)
+
+        if paragraphs and paragraphs[0] == '':
+            newsValue = entry.content[0].value
+            soup = BeautifulSoup(newsValue, 'html.parser')
+            newsSummary = soup.find_all('p')
+            newsSummary = [p.get_text() for p in newsSummary]
+            if newsSummary:
+                paragraphs.append(newsSummary[0])
 
         entries.append({
             'title': entry.title,
@@ -192,5 +205,5 @@ def Sub_cate(request, ob_id):
 
     # 템플릿 렌더링
     return render(request, "RssFeedWeb/category.html",
-                  {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third,
+                  {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "four":four, "five":five,
                    "paragraphs": paragraphs, "context": context, "url": url, "result": result})
