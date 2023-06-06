@@ -233,6 +233,7 @@ def scrap_Del(request, scrapData_id):
     previous_url = request.META.get('HTTP_REFERER', '/')
     return redirect(previous_url)
 
+@csrf_protect
 def scrapSave(request):
     if request.method == 'POST':
         form = ScrapForm(request.POST)
@@ -241,10 +242,10 @@ def scrapSave(request):
             title = form.cleaned_data['title']
 
             # scrapData 모델에 저장
-            scrap = scrapData(link=link, title=title)
+            scrap = scrapData.objects.create(link=link, title=title)
             scrap.save()
 
-            return HttpResponse('저장 완료')
+            return redirect('http://localhost:8000/scrap/')
     else:
         form = ScrapForm()
 

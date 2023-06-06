@@ -24,8 +24,8 @@ class SubscribeForm(forms.ModelForm):
         self.fields['link'].required = False  # link 필드를 선택 사항으로 설정
 
 class ScrapForm(forms.ModelForm):
-    scrapLink = forms.URLField()
-    scrapTitle = forms.CharField(max_length=200)
+    link = forms.URLField()
+    title = forms.CharField(max_length=200)
     class Meta:
         model = scrapData
         fields = ['title', 'link']

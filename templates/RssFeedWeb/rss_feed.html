@@ -135,7 +135,13 @@
                                         </div>
                                         <a href="{{ blogs.first.link }}" class="btn btn-primary">Go post</a>
                                         <div style="float:right">
-                                            <a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>
+                                            <form method="post" action="{% url 'scrapSave'%}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="title" value="{{ blogs.first.title }}">
+                                                <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                                <button type="submit" class="btn btn-success">Scrap</button>
+                                            </form>
+                                            <!--<a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>-->
                                         </div>
                                     </div>
                                 </div>
