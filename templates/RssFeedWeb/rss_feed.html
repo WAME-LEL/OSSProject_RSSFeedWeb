@@ -175,9 +175,12 @@
                                                 &nbsp;{{ blogs.second.published }}</p>
                                         </div>
                                         <a href="{{ blogs.second.link }}" class="btn btn-primary">Go post</a>
-                                        <div style="float:right">
-                                            <a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>
-                                        </div>
+                                        <form method="post" action="{% url 'scrapSave'%}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="title" value="{{ blogs.first.title }}">
+                                                <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                                <button type="submit" class="btn btn-success">Scrap</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -210,9 +213,12 @@
                                                 &nbsp;{{ blogs.third.published }}</p>
                                         </div>
                                         <a href="{{ blogs.third.link }}" class="btn btn-primary">Go post</a>
-                                        <div style="float:right">
-                                            <a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>
-                                        </div>
+                                        <form method="post" action="{% url 'scrapSave'%}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="title" value="{{ blogs.first.title }}">
+                                                <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                                <button type="submit" class="btn btn-success">Scrap</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -220,8 +220,6 @@ def scrap(request):
         subList = feedparser.parse(rss_Url)
         result.append(subList)
 
-
-
     return render(request, "RssFeedWeb/scrap.html",
            {"result":result,"url":url,"scrap":scrap})
 

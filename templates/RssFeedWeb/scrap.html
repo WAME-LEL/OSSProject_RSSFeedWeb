@@ -99,12 +99,12 @@
 
                 <div>
                     {% if scrap%}
-                        {%for link in scrap%}
+                        {%for scrap_item in scrap%}
                             <div class="m-3">
                                 <div class="card">
-                                     <a href="{{scrap.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap.title}}</a>
+                                     <a href="{{scrap_item.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap_item.blog}}</a>
                                      <div class="card-body">
-                                         <h5 class="card-title fw-bold">{{ scrap.title }}</h5>
+                                         <h5 class="card-title fw-bold">{{ scrap_item.title }}</h5>
                                          <div class="card-text">
                                          </div>
                                           <a href="{{ scrap.link }}" class="btn btn-primary">Go post</a>
