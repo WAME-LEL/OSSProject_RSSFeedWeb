@@ -9,3 +9,4 @@ class subsData(models.Model):
 class scrapData(models.Model):
     title = models.CharField(max_length=100)
     link = models.URLField(unique=True)
+    main_title = models.CharField(max_length=100)

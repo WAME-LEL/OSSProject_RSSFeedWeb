@@ -137,6 +137,7 @@
                                         <div style="float:right">
                                             <form method="post" action="{% url 'scrapSave'%}">
                                                 {% csrf_token %}
+                                                <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                                 <input type="hidden" name="title" value="{{ blogs.first.title }}">
                                                 <input type="hidden" name="link" value="{{ blogs.first.link }}">
                                                 <button type="submit" class="btn btn-success">Scrap</button>
@@ -177,6 +178,7 @@
                                         <a href="{{ blogs.second.link }}" class="btn btn-primary">Go post</a>
                                         <form method="post" action="{% url 'scrapSave'%}">
                                                 {% csrf_token %}
+                                                <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                                 <input type="hidden" name="title" value="{{ blogs.first.title }}">
                                                 <input type="hidden" name="link" value="{{ blogs.first.link }}">
                                                 <button type="submit" class="btn btn-success">Scrap</button>
@@ -215,6 +217,7 @@
                                         <a href="{{ blogs.third.link }}" class="btn btn-primary">Go post</a>
                                         <form method="post" action="{% url 'scrapSave'%}">
                                                 {% csrf_token %}
+                                                <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                                 <input type="hidden" name="title" value="{{ blogs.first.title }}">
                                                 <input type="hidden" name="link" value="{{ blogs.first.link }}">
                                                 <button type="submit" class="btn btn-success">Scrap</button>

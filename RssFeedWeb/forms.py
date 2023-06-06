@@ -26,6 +26,7 @@ class SubscribeForm(forms.ModelForm):
 class ScrapForm(forms.ModelForm):
     link = forms.URLField()
     title = forms.CharField(max_length=200)
+    main_title = forms.CharField(max_length=200)
     class Meta:
         model = scrapData
-        fields = ['title', 'link']
+        fields = ['title', 'link', 'main_title']

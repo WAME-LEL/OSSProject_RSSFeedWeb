@@ -238,9 +238,10 @@ def scrapSave(request):
         if form.is_valid():
             link = form.cleaned_data['link']
             title = form.cleaned_data['title']
+            main_title = form.cleaned_data['main_title']
 
             # scrapData 모델에 저장
-            scrap = scrapData.objects.create(link=link, title=title)
+            scrap = scrapData.objects.create(link=link, title=title, main_title=main_title)
             scrap.save()
 
             return redirect('http://localhost:8000/scrap/')
