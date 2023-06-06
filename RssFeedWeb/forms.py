@@ -1,5 +1,6 @@
 from django import forms
 from .models import subsData
+from .models import scrapData
 
 class SubscribeForm(forms.ModelForm):
     link = forms.CharField(max_length=200, required=False)
@@ -21,3 +22,10 @@ class SubscribeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['link'].required = False  # link 필드를 선택 사항으로 설정
+
+class ScrapForm(forms.ModelForm):
+    scrapLink = forms.URLField()
+    scrapTitle = forms.CharField(max_length=200)
+    class Meta:
+        model = scrapData
+        fields = ['title', 'link']

@@ -1,5 +1,5 @@
 # Create your views here.
-
+from django.http import HttpResponse
 # views.py
 
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 
 from .forms import SubscribeForm
 from .models import subsData
+from .forms import ScrapForm
+from .models import scrapData
 from datetime import datetime, timedelta
 
 
@@ -219,3 +221,29 @@ def scrap(request):
 
     return render(request, "RssFeedWeb/scrap.html",
            {"result":result,"url":url})
+
+def scrap_Del(request, scrapData_id):
+    # 구독 취소 기능
+    scrap = get_object_or_404(scrapData, pk=scrapData_id)
+    scrap.delete()
+    # return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    return redirect(previous_url)
+
+def scrapSave(request):
+    if request.method == 'POST':
+        form = ScrapForm(request.POST)
+        if form.is_valid():
+            link = form.cleaned_data['link']
+            title = form.cleaned_data['title']
+
+            # scrapData 모델에 저장
+            scrap = scrapData(link=link, title=title)
+            scrap.save()
+
+            return HttpResponse('저장 완료')
+    else:
+        form = ScrapForm()
+
+    context = {'form': form}
+    return render(request, 'scrap.html', context)
