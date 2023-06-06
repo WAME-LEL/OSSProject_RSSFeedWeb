@@ -102,12 +102,15 @@
                         {%for scrap_item in scrap%}
                             <div class="m-3">
                                 <div class="card">
-                                     <a href="{{scrap_item.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap_item.blog}}</a>
+                                     <a href="{{scrap_item.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap_item.main_title}}</a>
                                      <div class="card-body">
                                          <h5 class="card-title fw-bold">{{ scrap_item.title }}</h5>
                                          <div class="card-text">
                                          </div>
                                           <a href="{{ scrap.link }}" class="btn btn-primary">Go post</a>
+                                         <div style="float:right">
+                                             <a href="{% url 'scrap_Del' scrap_item.id%}" class="btn btn-success">Scrap Delete</a>
+                                         </div>
                                      </div>
                                 </div>
                              </div>
@@ -133,28 +136,28 @@
             <div class="pagination">
 
                 <div style="width:35%; margin: 5px;">
-                {% if scrap_list.has_previous %}
+                {% if page_obj.has_previous %}
                     <a class="abutton" href="?page=1">맨 앞으로</a>
-                    <a class="abutton" href="?page={{ scrap_list.previous_page_number }}">이전</a>
+                    <a class="abutton" href="?page={{ page_obj.previous_page_number }}">이전</a>
                 {% endif %}
                 </div>
 
                 <div style="width:30%; margin: 5px;">
-                {% for page in scrap_list.paginator.page_range %}
-                    {% if page >= scrap_list.number|add:-2 and page <= scrap_list.number|add:2 %}
-                    <span class="{% if page == board_list.number %}current{% endif %}">
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                    <span class="{% if page == page_obj.number %}current{% endif %}">
                         <a href="?page={{ page }}">{{ page}}</a>
                     </span>
-                    {% elif page >= scrap_list.number|add:-3 and page <= scrap_list.number|add:3 %}
+                    {% elif page >= page_obj.number|add:-3 and page <= page_obj.number|add:3 %}
                         ..
                     {% endif %}
                 {% endfor %}
                 </div>
 
                 <div style="width:35%; margin: 5px;">
-                {% if scrap_list.has_next %}
-                    <a class="abutton" href="?page={{ scrap_list.next_page_number }}">다음</a>
-                    <a class="abutton" href="?page={{ scrap_list.paginator.num_pages }}">맨 뒤로</a>
+                {% if page_obj.has_next %}
+                    <a class="abutton" href="?page={{ page_obj.next_page_number }}">다음</a>
+                    <a class="abutton" href="?page={{ page_objt.paginator.num_pages }}">맨 뒤로</a>
                 {% endif %}
                 </div>
 

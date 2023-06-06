@@ -108,7 +108,13 @@
                                 </div>
                                 <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>
                                 <div style="float:right">
-                                    <a href="{% url 'sub'%}" class="btn btn-success">Scrap</a>
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ latest_entry.title }}">
+                                        <input type="hidden" name="link" value="{{ latest_entry.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +147,13 @@
                                 </div>
                                 <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
                                 <div style="float:right">
-                                    <a href="{% url 'sub'%}" class="btn btn-success">Scrap</a>
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ second.title }}">
+                                        <input type="hidden" name="link" value="{{ second.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +189,13 @@
                                 </div>
                                 <a href="{{ third.link }}" class="btn btn-primary">Go post</a>
                                 <div style="float:right">
-                                    <a href="{% url 'sub'%}" class="btn btn-success">Scrap</a>
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ third.title }}">
+                                        <input type="hidden" name="link" value="{{ third.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
                                 </div>
 
                             </div>
@@ -211,9 +229,14 @@
                                 </div>
                                 <a href="{{ four.link }}" class="btn btn-primary">Go post</a>
                                 <div style="float:right">
-                                    <a href="{% url 'sub'%}" class="btn btn-success">Scrap</a>
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ four.title }}">
+                                        <input type="hidden" name="link" value="{{ four.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -245,7 +268,13 @@
                                 </div>
                                 <a href="{{ five.link }}" class="btn btn-primary">Go post</a>
                                 <div style="float:right">
-                                    <a href="{% url 'sub'%}" class="btn btn-success">Scrap</a>
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ blogs.first.title }}">
+                                        <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
                                 </div>
 
                             </div>

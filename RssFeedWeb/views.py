@@ -1,4 +1,5 @@
 # Create your views here.
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 # views.py
 
@@ -17,6 +18,8 @@ from datetime import datetime, timedelta
 
 def rss_feed(request):
     # RSS 피드 주소
+    scrap = scrapData.objects.last()
+    scrapP=scrapData.objects.all().order_by('-id')[1]
 
 
     if subsData.objects.exists():
@@ -96,7 +99,8 @@ def rss_feed(request):
                  'third': blog.entries[2]})
 
         # 템플릿 렌더링
-        return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days})
+        return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days,"scrap":scrap
+                                                            ,"scrapP":scrapP})
     else:
         return render(request, "RssFeedWeb/empty.html")
 
@@ -220,12 +224,16 @@ def scrap(request):
         subList = feedparser.parse(rss_Url)
         result.append(subList)
 
-    return render(request, "RssFeedWeb/scrap.html",
-           {"result":result,"url":url,"scrap":scrap})
+    paginator = Paginator(scrap, 4)
+    page_number = request.GET.get('page')  # 현재 페이지 번호 가져오기
+    page_obj = paginator.get_page(page_number)
 
-def scrap_Del(request, scrapData_id):
+    return render(request, "RssFeedWeb/scrap.html",
+           {"result":result,"url":url,"scrap":scrap,"page_obj":page_obj})
+
+def scrap_Del(request, scrap_item_id):
     # 구독 취소 기능
-    scrap = get_object_or_404(scrapData, pk=scrapData_id)
+    scrap = get_object_or_404(scrapData, pk=scrap_item_id)
     scrap.delete()
     # return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
     previous_url = request.META.get('HTTP_REFERER', '/')
