@@ -15,4 +15,5 @@ urlpatterns = [
     path('test/',views.sublist,name='sublist'),
     path('RSS_Del/<int:subsData_id>/', views.RSS_Del, name='RSS_Del'),
     path('Sub_cate/<int:ob_id>/',views.Sub_cate,name='Sub_cate'),
+    path('scrap/', views.scrap, name='scrap'),
 ]

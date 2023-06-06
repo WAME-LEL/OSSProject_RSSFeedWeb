@@ -207,3 +207,15 @@ def Sub_cate(request, ob_id):
     return render(request, "RssFeedWeb/category.html",
                   {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "four":four, "five":five,
                    "paragraphs": paragraphs, "context": context, "url": url, "result": result})
+
+
+def scrap(request):
+    url = subsData.objects.all()
+    result = []
+    for sub in url:
+        rss_Url = sub.link
+        subList = feedparser.parse(rss_Url)
+        result.append(subList)
+
+    return render(request, "RssFeedWeb/scrap.html",
+           {"result":result,"url":url})
