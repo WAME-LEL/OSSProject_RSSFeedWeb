@@ -102,18 +102,10 @@
                         {%for link in scrap%}
                             <div class="m-3">
                                 <div class="card">
-                                     <a href="{{scrap.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap.feed.title}}</a>
+                                     <a href="{{scrap.feed.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap.title}}</a>
                                      <div class="card-body">
                                          <h5 class="card-title fw-bold">{{ scrap.title }}</h5>
                                          <div class="card-text">
-                                             <div class="overflow-hidden" style="height:100px;">
-                                                <span class="badge text-bg-success">summary</span>
-                                                 {% for entries in context.entries %}
-                                                 {% for paragraph in entries.paragraphs %}
-                                                 <span>{{ paragraph }}</span>
-                                                 {% endfor %}
-                                                 {% endfor %}
-                                             </div>
                                          </div>
                                           <a href="{{ scrap.link }}" class="btn btn-primary">Go post</a>
                                      </div>

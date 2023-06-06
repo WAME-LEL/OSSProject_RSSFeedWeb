@@ -223,7 +223,7 @@ def scrap(request):
 
 
     return render(request, "RssFeedWeb/scrap.html",
-           {"result":result,"url":url})
+           {"result":result,"url":url,"scrap":scrap})
 
 def scrap_Del(request, scrapData_id):
     # 구독 취소 기능
