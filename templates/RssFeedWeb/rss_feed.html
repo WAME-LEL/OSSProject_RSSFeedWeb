@@ -134,6 +134,9 @@
                                                 &nbsp;{{ blogs.first.published }}</p>
                                         </div>
                                         <a href="{{ blogs.first.link }}" class="btn btn-primary">Go post</a>
+                                        <div style="float:right">
+                                            <a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +169,9 @@
                                                 &nbsp;{{ blogs.second.published }}</p>
                                         </div>
                                         <a href="{{ blogs.second.link }}" class="btn btn-primary">Go post</a>
+                                        <div style="float:right">
+                                            <a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -198,6 +204,9 @@
                                                 &nbsp;{{ blogs.third.published }}</p>
                                         </div>
                                         <a href="{{ blogs.third.link }}" class="btn btn-primary">Go post</a>
+                                        <div style="float:right">
+                                            <a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

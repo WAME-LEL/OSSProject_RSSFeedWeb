@@ -213,11 +213,14 @@ def Sub_cate(request, ob_id):
 
 def scrap(request):
     url = subsData.objects.all()
+    scrap=scrapData.objects.all()
     result = []
     for sub in url:
         rss_Url = sub.link
         subList = feedparser.parse(rss_Url)
         result.append(subList)
+
+
 
     return render(request, "RssFeedWeb/scrap.html",
            {"result":result,"url":url})
@@ -246,4 +249,4 @@ def scrapSave(request):
         form = ScrapForm()
 
     context = {'form': form}
-    return render(request, 'scrap.html', context)
+    return render(request, "RssFeedWeb/scrap.html", context)
