@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 def rss_feed(request):
     # RSS 피드 주소
     scrap = scrapData.objects.last()
-    scrapP=scrapData.objects.all().order_by('-id')[1]
+    scrapS = scrapData.objects.all()
 
 
     if subsData.objects.exists():
@@ -100,7 +100,7 @@ def rss_feed(request):
 
         # 템플릿 렌더링
         return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days,"scrap":scrap
-                                                            ,"scrapP":scrapP})
+                                                            ,"scrapS":scrapS})
     else:
         return render(request, "RssFeedWeb/empty.html")
 

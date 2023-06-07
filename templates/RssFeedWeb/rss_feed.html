@@ -134,16 +134,25 @@
                                                 &nbsp;{{ blogs.first.published }}</p>
                                         </div>
                                         <a href="{{ blogs.first.link }}" class="btn btn-primary">Go post</a>
-                                        <div style="float:right">
-                                            <form method="post" action="{% url 'scrapSave'%}">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
-                                                <input type="hidden" name="title" value="{{ blogs.first.title }}">
-                                                <input type="hidden" name="link" value="{{ blogs.first.link }}">
-                                                <button type="submit" class="btn btn-success">Scrap</button>
-                                            </form>
-                                            <!--<a href="{% url 'scrapSave'%}" class="btn btn-success">Scrap</a>-->
-                                        </div>
+                                        {% if scrapS %}
+                                            {% for scrap_item in scrapS %}
+                                                {% if scrap_item.link == blogs.first.link %}
+                                                    <div style="float:right">
+                                                        이미 스크랩된 글입니다.
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <div style="float:right">
+                                                <form method="post" action="{% url 'scrapSave' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                                    <input type="hidden" name="title" value="{{ blogs.first.title }}">
+                                                    <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                                    <button type="submit" class="btn btn-success">Scrap</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -176,21 +185,29 @@
                                                 &nbsp;{{ blogs.second.published }}</p>
                                         </div>
                                         <a href="{{ blogs.second.link }}" class="btn btn-primary">Go post</a>
-                                        <div style="float:right">
-                                            <form method="post" action="{% url 'scrapSave'%}">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
-                                                <input type="hidden" name="title" value="{{ blogs.second.title }}">
-                                                <input type="hidden" name="link" value="{{ blogs.second.link }}">
-                                                <button type="submit" class="btn btn-success">Scrap</button>
-                                            </form>
-                                        </div>
-
+                                        {% if scrapS %}
+                                            {% for scrap_item in scrapS %}
+                                                {% if scrap_item.link == blogs.second.link %}
+                                                    <div style="float:right">
+                                                        이미 스크랩된 글입니다.
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <div style="float:right">
+                                                <form method="post" action="{% url 'scrapSave' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                                    <input type="hidden" name="title" value="{{ blogs.second.title }}">
+                                                    <input type="hidden" name="link" value="{{ blogs.second.link }}">
+                                                    <button type="submit" class="btn btn-success">Scrap</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                             {% endif %}
-
 
                             {% if blogs.entries.2.paragraphs %}
                             <div class="m-3 me-auto p-2">
@@ -218,15 +235,24 @@
                                                 &nbsp;{{ blogs.third.published }}</p>
                                         </div>
                                         <a href="{{ blogs.third.link }}" class="btn btn-primary">Go post</a>
-                                        <div style="float:right">
-                                            <form method="post" action="{% url 'scrapSave'%}">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
-                                                <input type="hidden" name="title" value="{{ blogs.third.title }}">
-                                                <input type="hidden" name="link" value="{{ blogs.third.link }}">
-                                                <button type="submit" class="btn btn-success">Scrap</button>
-                                            </form>
-                                        </div>
+
+                                        {% if scrapS %}
+                                                {% if scrap_item.link == blogs.third.link %}
+                                                    <div style="float:right">
+                                                        이미 스크랩된 글입니다.
+                                                    </div>
+                                                {% endif %}
+                                        {% else %}
+                                            <div style="float:right">
+                                                <form method="post" action="{% url 'scrapSave' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                                    <input type="hidden" name="title" value="{{ blogs.third.title }}">
+                                                    <input type="hidden" name="link" value="{{ blogs.third.link }}">
+                                                    <button type="submit" class="btn btn-success">Scrap</button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -299,24 +325,6 @@
 
                     <div class="container-fluid px-4">
                         <div class="border border-2 mt-4 p-2 rounded-4">
-                            <div>
-                                {% if scrapP%}
-                                 <div>
-                                     <div class="text">
-                                          <a href="{{scrap_item.link}}" class="card-header fs-5 text-decoration-none" style="color:blue">{{scrapP.main_title}}</a>
-                                          <div class="card-body">
-                                              <h5 class="card-title fw-bold">{{ scrapP.title }}</h5>
-                                               <div class="card-text">
-                                              <a href="{{ scrap.link }}" class="btn btn-primary">Go post</a>
-                                         </div>
-                                     </div>
-                                    </div>
-                                 </div>
-                                {%else%}
-                                     <h6>아직 스크랩 한 글이 없습니다.</h6>
-                                    <h6>지금 스크랩을 해보세요!</h6>
-                                  {%endif%}
-                             </div>
                         </div>
                     </div>
 
