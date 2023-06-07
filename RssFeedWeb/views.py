@@ -1,5 +1,6 @@
 # Create your views here.
-
+from django.core.paginator import Paginator
+from django.http import HttpResponse
 # views.py
 
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,11 +11,15 @@ from bs4 import BeautifulSoup
 
 from .forms import SubscribeForm
 from .models import subsData
+from .forms import ScrapForm
+from .models import scrapData
 from datetime import datetime, timedelta
 
 
 def rss_feed(request):
     # RSS 피드 주소
+    scrap = scrapData.objects.last()
+    scrapS = scrapData.objects.all()
 
 
     if subsData.objects.exists():
@@ -73,7 +78,6 @@ def rss_feed(request):
 
                     if not paragraphs:
                         paragraphs.append(content)
-                        print(content)
 
                     if paragraphs[0] == '':
                         newsValue = entry.content[0].value
@@ -94,7 +98,8 @@ def rss_feed(request):
                  'third': blog.entries[2]})
 
         # 템플릿 렌더링
-        return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days})
+        return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days,"scrap":scrap
+                                                            ,"scrapS":scrapS})
     else:
         return render(request, "RssFeedWeb/empty.html")
 
@@ -207,3 +212,53 @@ def Sub_cate(request, ob_id):
     return render(request, "RssFeedWeb/category.html",
                   {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "four":four, "five":five,
                    "paragraphs": paragraphs, "context": context, "url": url, "result": result})
+
+
+def scrap(request):
+    url = subsData.objects.all()
+    scrap=scrapData.objects.all()
+    result = []
+    for sub in url:
+        rss_Url = sub.link
+        subList = feedparser.parse(rss_Url)
+        result.append(subList)
+
+    paginator = Paginator(scrap, 4)
+    page_number = request.GET.get('page')  # 현재 페이지 번호 가져오기
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "RssFeedWeb/scrap.html",
+           {"result":result,"url":url,"scrap":scrap,"page_obj":page_obj})
+
+def scrap_Del(request, scrap_item_id):
+    # 구독 취소 기능
+    scrap = get_object_or_404(scrapData, pk=scrap_item_id)
+    scrap.delete()
+    # return render(request, 'RssFeedWeb/sub.html', {'subsData_id':subsData.id})
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    return redirect(previous_url)
+
+@csrf_protect
+def scrapSave(request):
+    if request.method == 'POST':
+        form = ScrapForm(request.POST)
+        if form.is_valid():
+            link = form.cleaned_data['link']
+            title = form.cleaned_data['title']
+            main_title = form.cleaned_data['main_title']
+            if not scrapData.objects.filter(link=link).exists():
+                # scrapData 모델에 저장
+                scrap = scrapData.objects.create(link=link, title=title, main_title=main_title)
+                scrap.save()
+
+                return redirect('http://localhost:8000/')
+                
+
+        else:
+            return redirect('http://localhost:8000/')
+
+    else:
+        form = ScrapForm()
+
+    context = {'form': form}
+    return redirect('http://localhost:8000/')

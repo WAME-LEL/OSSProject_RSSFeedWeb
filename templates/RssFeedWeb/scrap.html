@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Subscribe</title>
+    <title>RSS Feed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
@@ -29,7 +29,6 @@
     <!-- Sidebar Toggle-->
 
 </nav>
-
 
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -60,7 +59,6 @@
                             {% endfor %}
                         </nav>
                     </div>
-
                     <a class="nav-link" href="{%url 'scrap'%}">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Scrap
@@ -85,6 +83,7 @@
 <!--                        </nav>-->
 <!--                    </div>-->
 
+
                     <div class="sb-sidenav-menu-heading">subscribe</div>
                     <a href="{%url 'sub'%}" class="btn btn-outline-success mx-3" role="button">구독</a>
 
@@ -97,48 +96,30 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <!-- 구독 기능 -->
-                <div class="container">
-                    <form method="post" action="{% url 'sub' %}" class="my-3">
-                        {% csrf_token %}
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="구독 사이트 주소를 입력해주세요" aria-label="subscribe_textview" aria-describedby="button-addon2" name="link" value="{{ form.link.value|default_if_none:'' }}">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">구독</button>
-                        </div>
-                    </form>
-                    {% if error_message %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ error_message }}
-                        </div>
-                    {% elif form.errors %}
-                        <div class="alert alert-danger" role="alert">
-                            {% if form.errors.link %}
-                                {% if form.errors.link.0 == "Subs data의 Link은/는 이미 존재합니다." %}
-                                    이미 저장된 구독 사이트입니다.
-                                {% else %}
-                                    {{ form.errors.link.0 }}
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
 
-                {% for subsData in sub_list %}
-                 <div class="card mb-3">
-                    {% for result in result %}
-                            {% if forloop.parentloop.counter == forloop.counter %}
-                                <h5 class="card-header fs-5 text-decoration-none"><span class="badge rounded-pill text-bg-primary"></span>구독사이트 제목 : &nbsp;{{ result.feed.title }}</h5>
-                                <div class="card-body">
-                                 <h5 class="card-title">사이트 링크 : <a href="{{ result.feed.link }}" class="card-text" style="text-decoration:none;"><span class="badge rounded-pill text-bg-primary"></span>{{ subsData.link }}</a></h5>
-                                <p class="card-text">구독일 : {{ subsData.date }}</p> <!-- 구독한 날짜 표시 -->
-                                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
-                                 data-uri="{% url 'RSS_Del' subsData.id  %}">구독취소</a>
+                <div>
+                    {% if scrap%}
+                        {%for scrap_item in scrap%}
+                            <div class="m-3">
+                                <div class="card">
+                                     <a href="{{scrap_item.link}}" class="card-header fs-5 text-decoration-none"><span class = "badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap_item.main_title}}</a>
+                                     <div class="card-body">
+                                         <h5 class="card-title fw-bold">{{ scrap_item.title }}</h5>
+                                         <div class="card-text">
+                                         </div>
+                                          <a href="{{ scrap.link }}" class="btn btn-primary">Go post</a>
+                                         <div style="float:right">
+                                             <a href="{% url 'scrap_Del' scrap_item.id%}" class="btn btn-success">Scrap Delete</a>
+                                         </div>
+                                     </div>
                                 </div>
-                            {% endif %}
-                    {% endfor %}
+                             </div>
+                        {%endfor%}
+                    {%else%}
+                        <h6>아직 스크랩 한 글이 없습니다.</h6>
+                        <h6>지금 스크랩을 해보세요!</h6>
+                    {%endif%}
                 </div>
-                {% endfor %}
-
             </div>
         </main>
 
@@ -149,26 +130,44 @@
                 </div>
             </div>
         </footer>
-
     </div>
-</div>
+
+    <div style="text-align:center">
+            <div class="pagination">
+
+                <div style="width:35%; margin: 5px;">
+                {% if page_obj.has_previous %}
+                    <a class="abutton" href="?page=1">맨 앞으로</a>
+                    <a class="abutton" href="?page={{ page_obj.previous_page_number }}">이전</a>
+                {% endif %}
+                </div>
+
+                <div style="width:30%; margin: 5px;">
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                    <span class="{% if page == page_obj.number %}current{% endif %}">
+                        <a href="?page={{ page }}">{{ page}}</a>
+                    </span>
+                    {% elif page >= page_obj.number|add:-3 and page <= page_obj.number|add:3 %}
+                        ..
+                    {% endif %}
+                {% endfor %}
+                </div>
+
+                <div style="width:35%; margin: 5px;">
+                {% if page_obj.has_next %}
+                    <a class="abutton" href="?page={{ page_obj.next_page_number }}">다음</a>
+                    <a class="abutton" href="?page={{ page_objt.paginator.num_pages }}">맨 뒤로</a>
+                {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous">
-</script>
+        crossorigin="anonymous"></script>
 
-{% block script %}
-<script type='text/javascript'>
-const delete_elements = document.getElementsByClassName("delete");
-Array.from(delete_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 구독을 취소하겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
-    });
-});
-</script>
-{% endblock %}
 
 </body>
 </html>

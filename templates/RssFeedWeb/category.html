@@ -59,26 +59,10 @@
                             {% endfor %}
                         </nav>
                     </div>
-<!--                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"-->
-<!--                       aria-expanded="false" aria-controls="collapsePages">-->
-<!--                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
-<!--                        Pages-->
-<!--                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-<!--                    </a>-->
-<!--                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"-->
-<!--                         data-bs-parent="#sidenavAccordion">-->
-<!--                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">-->
-<!--                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"-->
-<!--                               data-bs-target="#pagesCollapseAuth" aria-expanded="false"-->
-<!--                               aria-controls="pagesCollapseAuth">-->
-<!--                                Authentication-->
-<!--                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-<!--                            </a>-->
-
-
-<!--                        </nav>-->
-<!--                    </div>-->
-
+                    <a class="nav-link" href="{%url 'scrap'%}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Scrap
+                   </a>
                     <div class="sb-sidenav-menu-heading">subscribe</div>
                     <a href="{%url 'sub'%}" class="btn btn-outline-success mx-3" role="button">구독</a>
 
@@ -123,6 +107,15 @@
                                         &nbsp;{{ latest_entry.published }}</p>
                                 </div>
                                 <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>
+                                <div style="float:right">
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ latest_entry.title }}">
+                                        <input type="hidden" name="link" value="{{ latest_entry.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,6 +146,15 @@
 
                                 </div>
                                 <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
+                                <div style="float:right">
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ second.title }}">
+                                        <input type="hidden" name="link" value="{{ second.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -186,6 +188,16 @@
 
                                 </div>
                                 <a href="{{ third.link }}" class="btn btn-primary">Go post</a>
+                                <div style="float:right">
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ third.title }}">
+                                        <input type="hidden" name="link" value="{{ third.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -216,6 +228,15 @@
 
                                 </div>
                                 <a href="{{ four.link }}" class="btn btn-primary">Go post</a>
+                                <div style="float:right">
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ four.title }}">
+                                        <input type="hidden" name="link" value="{{ four.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -246,6 +267,16 @@
 
                                 </div>
                                 <a href="{{ five.link }}" class="btn btn-primary">Go post</a>
+                                <div style="float:right">
+                                    <form method="post" action="{% url 'scrapSave'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
+                                        <input type="hidden" name="title" value="{{ blogs.first.title }}">
+                                        <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                        <button type="submit" class="btn btn-success">Scrap</button>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
