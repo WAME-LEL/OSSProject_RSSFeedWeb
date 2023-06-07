@@ -106,10 +106,20 @@
                             <button class="btn btn-outline-secondary" type="submit" id="button-addon2">구독</button>
                         </div>
                     </form>
-                    {% if form.errors %}
+                    {% if error_message %}
                         <div class="alert alert-danger" role="alert">
-                            이미 구독한 사이트입니다!
-                         </div>
+                            {{ error_message }}
+                        </div>
+                    {% elif form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% if form.errors.link %}
+                                {% if form.errors.link.0 == "Subs data의 Link은/는 이미 존재합니다." %}
+                                    이미 저장된 구독 사이트입니다.
+                                {% else %}
+                                    {{ form.errors.link.0 }}
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     {% endif %}
                 </div>
 
