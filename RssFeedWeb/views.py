@@ -225,7 +225,7 @@ def scrap(request):
         subList = feedparser.parse(rss_Url)
         result.append(subList)
 
-    paginator = Paginator(scrap, 5)
+    paginator = Paginator(scrap, 4)
     page_number = request.GET.get('page',1)  # 현재 페이지 번호 가져오기
     page_obj = paginator.get_page(page_number)
 
@@ -262,3 +262,26 @@ def scrapSave(request):
 
     context = {'form': form}
     return redirect('http://localhost:8000/')
+
+@csrf_protect
+def scrapSaveS(request):
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    if request.method == 'POST':
+        form = ScrapForm(request.POST)
+        if form.is_valid():
+            link = form.cleaned_data['link']
+            title = form.cleaned_data['title']
+            main_title = form.cleaned_data['main_title']
+            if not scrapData.objects.filter(link=link).exists():
+                # scrapData 모델에 저장
+                scrap = scrapData.objects.create(link=link, title=title, main_title=main_title)
+                scrap.save()
+                return redirect(previous_url)
+        else:
+            return redirect(previous_url)
+
+    else:
+        form = ScrapForm()
+
+    context = {'form': form}
+    return redirect('http://localhost:8000/category/')

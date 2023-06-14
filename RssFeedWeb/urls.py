@@ -18,4 +18,5 @@ urlpatterns = [
     path('scrap/', views.scrap, name='scrap'),
     path('scrapSave/',views.scrapSave,name='scrapSave'),
     path('scrap_Del/<int:scrap_item_id>/',views.scrap_Del,name='scrap_Del'),
+    path('scrapSaveS/',views.scrapSaveS,name='scrapSaveS'),
 ]

@@ -115,7 +115,7 @@
                                 {% endif %}
                                 {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave' %}">
+                                    <form method="post" action="{% url 'scrapSaveS' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ latest_entry.title }}">
@@ -161,7 +161,7 @@
                                 {% endif %}
                                 {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave' %}">
+                                    <form method="post" action="{% url 'scrapSaveS' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ second.title }}">
@@ -210,7 +210,7 @@
                                 {% endif %}
                                 {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave' %}">
+                                    <form method="post" action="{% url 'scrapSaveS' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ third.title }}">
@@ -256,7 +256,7 @@
                                 {% endif %}
                                 {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave' %}">
+                                    <form method="post" action="{% url 'scrapSaveS' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ four.title }}">
@@ -302,7 +302,7 @@
                                 {% endif %}
                                 {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave' %}">
+                                    <form method="post" action="{% url 'scrapSaveS' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ five.title }}">

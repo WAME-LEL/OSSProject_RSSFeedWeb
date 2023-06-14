@@ -16,7 +16,7 @@
         }
         .pagination {
              position: fixed;
-             bottom: 50px;
+             bottom: 75px;
              left: 0;
              width: 100%;
         }
@@ -142,11 +142,12 @@
         </footer>
     </div>
 
-         <div style="text-align:center; weight:300px; height:300px">
+         <div style="text-align:center;">
             <div class="pagination">
                 <div style="width:35%; margin: 5px;">
                 {% if page_obj.has_previous %}
                     <a class="abutton" href="?page=1">맨 앞으로</a>
+                     <span style="margin-right: 10px;"></span>
                     <a class="abutton" href="?page={{ page_obj.previous_page_number }}">이전</a>
                 {% endif %}
                 </div>
@@ -165,6 +166,7 @@
                 <div style="width:35%; margin: 5px;">
                 {% if page_obj.has_next %}
                     <a class="abutton" href="?page={{ page_obj.next_page_number }}">다음</a>
+                     <span style="margin-right: 10px;"></span>
                     <a class="abutton" href="?page={{ page_objt.paginator.num_pages }}">맨 뒤로</a>
                 {% endif %}
                 </div>
