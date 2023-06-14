@@ -107,8 +107,15 @@
                                         &nbsp;{{ latest_entry.published }}</p>
                                 </div>
                                 <a href="{{ latest_entry.link }}" class="btn btn-primary">Go post</a>
+                                {% for scrap_item in scrapS %}
+                                {% if scrap_item.link == latest_entry.link %}
+                                    <div style="float:right">
+                                        이미 스크랩된 글입니다.
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave'%}">
+                                    <form method="post" action="{% url 'scrapSave' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ latest_entry.title }}">
@@ -146,8 +153,15 @@
 
                                 </div>
                                 <a href="{{ second.link }}" class="btn btn-primary">Go post</a>
+                                 {% for scrap_item in scrapS %}
+                                {% if scrap_item.link == second.link %}
+                                    <div style="float:right">
+                                        이미 스크랩된 글입니다.
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave'%}">
+                                    <form method="post" action="{% url 'scrapSave' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ second.title }}">
@@ -188,8 +202,15 @@
 
                                 </div>
                                 <a href="{{ third.link }}" class="btn btn-primary">Go post</a>
+                                {% for scrap_item in scrapS %}
+                                {% if scrap_item.link == third.link %}
+                                    <div style="float:right">
+                                        이미 스크랩된 글입니다.
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave'%}">
+                                    <form method="post" action="{% url 'scrapSave' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ third.title }}">
@@ -197,7 +218,6 @@
                                         <button type="submit" class="btn btn-success">Scrap</button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -228,8 +248,15 @@
 
                                 </div>
                                 <a href="{{ four.link }}" class="btn btn-primary">Go post</a>
+                                {% for scrap_item in scrapS %}
+                                {% if scrap_item.link == four.link %}
+                                    <div style="float:right">
+                                        이미 스크랩된 글입니다.
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave'%}">
+                                    <form method="post" action="{% url 'scrapSave' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
                                         <input type="hidden" name="title" value="{{ four.title }}">
@@ -267,16 +294,22 @@
 
                                 </div>
                                 <a href="{{ five.link }}" class="btn btn-primary">Go post</a>
+                                {% for scrap_item in scrapS %}
+                                {% if scrap_item.link == five.link %}
+                                    <div style="float:right">
+                                        이미 스크랩된 글입니다.
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
                                 <div style="float:right">
-                                    <form method="post" action="{% url 'scrapSave'%}">
+                                    <form method="post" action="{% url 'scrapSave' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="main_title" value="{{ feed.feed.title }}">
-                                        <input type="hidden" name="title" value="{{ blogs.first.title }}">
-                                        <input type="hidden" name="link" value="{{ blogs.first.link }}">
+                                        <input type="hidden" name="title" value="{{ five.title }}">
+                                        <input type="hidden" name="link" value="{{ five.link }}">
                                         <button type="submit" class="btn btn-success">Scrap</button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>

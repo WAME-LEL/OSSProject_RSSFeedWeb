@@ -14,6 +14,7 @@ from .models import subsData
 from .forms import ScrapForm
 from .models import scrapData
 from datetime import datetime, timedelta
+from django.core.paginator import Paginator
 
 
 def rss_feed(request):
@@ -155,6 +156,7 @@ def RSS_Del(request, subsData_id):
 
 
 def Sub_cate(request, ob_id):
+    scrapS = scrapData.objects.all()
     url = subsData.objects.all()
     subscribe = get_object_or_404(subsData, pk=ob_id)
     rss_url = subscribe.link
@@ -211,7 +213,7 @@ def Sub_cate(request, ob_id):
     # 템플릿 렌더링
     return render(request, "RssFeedWeb/category.html",
                   {"feed": feed, "latest_entry": latest_entry, "second": second, "third": third, "four":four, "five":five,
-                   "paragraphs": paragraphs, "context": context, "url": url, "result": result})
+                   "paragraphs": paragraphs, "context": context, "url": url, "result": result,"scrapS":scrapS})
 
 
 def scrap(request):
@@ -223,8 +225,8 @@ def scrap(request):
         subList = feedparser.parse(rss_Url)
         result.append(subList)
 
-    paginator = Paginator(scrap, 4)
-    page_number = request.GET.get('page')  # 현재 페이지 번호 가져오기
+    paginator = Paginator(scrap, 5)
+    page_number = request.GET.get('page',1)  # 현재 페이지 번호 가져오기
     page_obj = paginator.get_page(page_number)
 
     return render(request, "RssFeedWeb/scrap.html",
@@ -252,8 +254,6 @@ def scrapSave(request):
                 scrap.save()
 
                 return redirect('http://localhost:8000/')
-                
-
         else:
             return redirect('http://localhost:8000/')
 
