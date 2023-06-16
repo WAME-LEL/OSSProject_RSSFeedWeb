@@ -19,8 +19,12 @@ from django.core.paginator import Paginator
 
 def rss_feed(request):
     # RSS 피드 주소
-    scrap = scrapData.objects.last()
+    scrap = scrapData.objects.all()
     scrapS = scrapData.objects.all()
+
+    paginator = Paginator(scrap, 3)
+    page_number = request.GET.get('page', 1)  # 현재 페이지 번호 가져오기
+    page_obj = paginator.get_page(page_number)
 
 
     if subsData.objects.exists():
@@ -30,9 +34,6 @@ def rss_feed(request):
         except:
             selected_days = 0
 
-
-
-        subs_data = subsData.objects.first()
         urls = subsData.objects.all()
         result = []
 
@@ -43,11 +44,6 @@ def rss_feed(request):
 
         # RSS 피드 파싱
         feed = result[0]
-
-        # 최신 글 하나 가져오기
-        latest_entry = feed.entries[0]
-        second = feed.entries[1]
-        third = feed.entries[2]
 
         contextTest = []
 
@@ -95,12 +91,12 @@ def rss_feed(request):
                     i = i + 1
 
             contextTest.append(
-                {'entries': entries, 'blog': blog.feed.title, 'first': blog.entries[0], 'second': blog.entries[1],
+                {'entries': entries, 'blog': blog.feed.title, 'link': blog.feed.link, 'first': blog.entries[0], 'second': blog.entries[1],
                  'third': blog.entries[2]})
 
         # 템플릿 렌더링
-        return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days,"scrap":scrap
-                                                            ,"scrapS":scrapS})
+        return render(request, "RssFeedWeb/rss_feed.html", {"feed": feed, "url": urls, "result": result, 'contextTest': contextTest, 'selected_days': selected_days,"scrap": scrap
+                                                            ,"scrapS": scrapS, 'page_obj': page_obj})
     else:
         return render(request, "RssFeedWeb/empty.html")
 
@@ -253,15 +249,18 @@ def scrapSave(request):
                 scrap = scrapData.objects.create(link=link, title=title, main_title=main_title)
                 scrap.save()
 
-                return redirect('http://localhost:8000/')
+                # return redirect('https://rss-feed-web.fly.dev/')    #배포 서버용
+                return redirect('http://localhost:8000/')  # 로컬 호스트용
         else:
-            return redirect('http://localhost:8000/')
+            # return redirect('https://rss-feed-web.fly.dev/')    #배포 서버용
+            return redirect('http://localhost:8000/')  # 로컬 호스트용
 
     else:
         form = ScrapForm()
 
     context = {'form': form}
-    return redirect('http://localhost:8000/')
+    # return redirect('https://rss-feed-web.fly.dev/')    #배포 서버용
+    return redirect('http://localhost:8000/')  # 로컬 호스트용
 
 @csrf_protect
 def scrapSaveS(request):
@@ -284,4 +283,5 @@ def scrapSaveS(request):
         form = ScrapForm()
 
     context = {'form': form}
-    return redirect('http://localhost:8000/category/')
+    # return redirect('https://rss-feed-web.fly.dev/category/')    #배포 서버용
+    return redirect('http://localhost:8000/category/')  # 로컬 호스트용

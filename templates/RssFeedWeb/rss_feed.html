@@ -111,7 +111,7 @@
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
-                                    <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span
+                                    <a href="{{blogs.link}}" class="card-header fs-5 text-decoration-none"><span
                                             class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{blogs.blog}}</a>
 
 
@@ -161,7 +161,7 @@
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
-                                    <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span
+                                    <a href="{{blogs.link}}" class="card-header fs-5 text-decoration-none"><span
                                             class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{blogs.blog}}</a>
 
 
@@ -210,7 +210,7 @@
                             <div class="m-3 me-auto p-2">
                                 <div class="card" style="width:370px; height:370px">
 
-                                    <a href="{{feed.feed.link}}" class="card-header fs-5 text-decoration-none"><span
+                                    <a href="{{blogs.link}}" class="card-header fs-5 text-decoration-none"><span
                                             class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{blogs.blog}}</a>
 
 
@@ -303,33 +303,40 @@
                     </div>
 
                     <div class="container-fluid px-4">
+
                         <div class="border border-2 mt-4 p-2 rounded-4">
+                            <span>스크랩</span>
+                            <a href="{%url 'scrap'%}" class="float-end fw-bold text-decoration-none">더보기</a>
                             <div>
                                 {% if scrap%}
-                                <div>
-                                    <div class="text">
-                                        <a href="{{scrap_item.link}}" class="card-header fs-5 text-decoration-none"
-                                           style="color:blue">{{scrap.main_title}}</a>
+                                {%for scrap_item in page_obj%}
+                                <div class="m-3">
+                                    <div class="card">
+                                        <a href="{{scrap.html}}" class="card-header fs-5 text-decoration-none"><span
+                                                class="badge rounded-pill text-bg-primary">blog</span>&nbsp;{{scrap_item.main_title}}</a>
                                         <div class="card-body">
-                                            <h5 class="card-title fw-bold">{{ scrap.title }}</h5>
+                                            <h5 class="card-title fw-bold">{{ scrap_item.title }}</h5>
                                             <div class="card-text">
-                                                <a href="{{ scrap.link }}" class="btn btn-primary">Go post</a>
+                                            </div>
+                                            <a href="{{ scrap_item.link }}" class="btn btn-primary">Go post</a>
+                                            <div style="float:right">
+                                                <a href="{% url 'scrap_Del' scrap_item.id%}" class="btn btn-success">Scrap
+                                                    Delete</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {%endfor%}
+
                                 {%else%}
                                 <h6>아직 스크랩 한 글이 없습니다.</h6>
                                 <h6>지금 스크랩을 해보세요!</h6>
                                 {%endif%}
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="container-fluid px-4">
-                        <div class="border border-2 mt-4 p-2 rounded-4">
-                        </div>
-                    </div>
 
                 </div>
             </div>
