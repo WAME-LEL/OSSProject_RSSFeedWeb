@@ -35,3 +35,6 @@
 ### WBS
 [(링크)(클릭) WBS 구글 스프레드 사이트 링크](https://docs.google.com/spreadsheets/d/1d2JO0KBQE9fXQ51-dqd_syQR3cCEJ8yWXrftlQvSgs8/edit#gid=0)
 
+### LICENSE
+본 프로젝트는 MIT LICENSE를 따릅니다. 자세한 사항은 프로젝트의 LICENSE 파일을 확인해주십시오.
+
