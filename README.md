@@ -24,17 +24,14 @@
 
 ### 예시 이미지
 
-<img src="https://github.com/WAME-LEL/OSSProject_RSSFeedWeb/assets/56767018/3fff1058-be6e-4635-940a-f4bed3fe1826"  width="700" height="400">
+<img src="https://github.com/WAME-LEL/OSSProject_RSSFeedWeb/assets/56767018/40f119e0-bbe9-4f9e-b9f9-da440e8b242a"  width="700" height="400">
 
-(개발 전 예시 이미지입니다. 개발이 완료되면 교체 예정)
 
 ### 요구사항 정의서
 
-<img src="https://github.com/WAME-LEL/OSSProject_RSSFeedWeb/assets/56767018/3592389b-64f3-4a67-a230-8765fde69749"  width="700" height="400">
+<img src="https://github.com/WAME-LEL/OSSProject_RSSFeedWeb/assets/56767018/b3d16989-ee73-4513-b4f6-66ee4276ac80"  width="700" height="400">
 
-(요구사항 정의서 초안입니다. 개발 진행에 따라 변경될 수 있습니다.)
 
 ### WBS
 [(링크)(클릭) WBS 구글 스프레드 사이트 링크](https://docs.google.com/spreadsheets/d/1d2JO0KBQE9fXQ51-dqd_syQR3cCEJ8yWXrftlQvSgs8/edit#gid=0)
 
-(프로젝트 업무 일정입니다. 개발 일정에 따라 변경될 수 있습니다.)
